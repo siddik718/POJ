@@ -1,6 +1,10 @@
 import axios from "axios";
 import base64 from 'base-64';
-// (source, input, langID, expectedOutput, timeLimit, memoryLimit)
+import { config } from "dotenv";
+config();
+
+const API = process.env.RAPIDAPIKEY;
+
 export const createSubmission = async ( source,input,langID,expectedOutput,timeLimit) => {
   const baseSource = base64.encode(source);
   const baseInput = base64.encode(input);
@@ -17,7 +21,7 @@ export const createSubmission = async ( source,input,langID,expectedOutput,timeL
     headers: {
       "content-type": "application/json",
       "Content-Type": "application/json",
-      "X-RapidAPI-Key": "8789e99558msh4b0f656e0c57d26p1ad6d8jsnd37dcc066655",
+      "X-RapidAPI-Key": API,
       "X-RapidAPI-Host": "judge0-ce.p.rapidapi.com",
     },
     data: {
@@ -40,7 +44,7 @@ export const createSubmission = async ( source,input,langID,expectedOutput,timeL
 };
 
 export const getSubmission = async (token) => {
-  console.log(token);
+  // console.log(token);
   const options = {
     method: "GET",
     url: `https://judge0-ce.p.rapidapi.com/submissions/${token}`,
@@ -49,7 +53,7 @@ export const getSubmission = async (token) => {
       fields: "*",
     },
     headers: {
-      "X-RapidAPI-Key": "8789e99558msh4b0f656e0c57d26p1ad6d8jsnd37dcc066655",
+      "X-RapidAPI-Key": API,
       "X-RapidAPI-Host": "judge0-ce.p.rapidapi.com",
     },
   };
