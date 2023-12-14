@@ -1,0 +1,33 @@
+import express, { json, urlencoded } from 'express';
+import { config } from 'dotenv';
+import connectDB from './Dbconfig/db.js';
+import cors from 'cors';
+
+const app = express();
+
+// get the .env values here.
+config();
+const PORT = process.env.PORT;
+
+// middlewires.
+app.use(cors());
+app.use(json());
+app.use(urlencoded({extended:true}));
+
+// database connection.
+connectDB();
+
+// Import Routes Here.
+import userRoute from './Routes/userRoute.js'
+import blogRoute from './Routes/blogRoute.js'
+import problemRoute from './Routes/problemRoute.js'
+import submissionRoute from './Routes/submissionRoute.js'
+
+app.use("/api/user",userRoute);
+app.use("/api/blog",blogRoute);
+app.use('/api/problem',problemRoute);
+app.use('/api/submission',submissionRoute);
+
+app.listen(PORT,()=>{
+    console.log(`Server is running at http://localhost:${PORT}`);
+});
