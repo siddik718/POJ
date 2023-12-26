@@ -69,19 +69,21 @@ export const test = async (req,res) => {
       const expectedOutput = problem.output;
       const timeLimit = problem.timeLimit;
       const response = await createSubmission(source_code,input,langID,expectedOutput,timeLimit);
+
       setTimeout(async ()=>{
         const responseTwo = await getSubmission(response.token);
+        console.log(responseTwo);
         // store the result 
         const tot = await SUBMISSION.find();
         const submission = new SUBMISSION({
-        username,
-        submissionID:(tot.length + 1),
-        problemID:id,
-        title: problem.title,
-        status:responseTwo.status.description,
-        language: language,
-        difficulty: problem.difficulty,
-        sourceCode:source_code
+          username,
+          submissionID:(tot.length + 1),
+          problemID:id,
+          title: problem.title,
+          status:responseTwo.status.description,
+          language: language,
+          difficulty: problem.difficulty,
+          sourceCode:source_code
         });
   
         await submission.save();
