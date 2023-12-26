@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { deleteData } from '../Authoraization/Auth';
 import { AppBar, Box, Toolbar, IconButton, Menu, Container, Avatar, Button, MenuItem, Typography } from '@mui/material';
 import { blue } from '@mui/material/colors';
+import { googleLogout } from '@react-oauth/google';
 
 const pages = [
   { name: 'Home', path: '/', id: 1 },
@@ -22,6 +23,7 @@ export function Navbar() {
   const handleLogout = () => {
     deleteData();
     setUsername('');
+    googleLogout();
     navigate('/');
   };
 

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, Dialog, DialogTitle, DialogContent, DialogActions, Tooltip, IconButton, Pagination, } from '@mui/material';
-
+import axios from 'axios';
 export const SubmissionTable = ({ submissions }) => {
 
     const [page, setPage] = useState(1);
@@ -16,9 +16,18 @@ export const SubmissionTable = ({ submissions }) => {
     const [selectedSourceCode, setSelectedSourceCode] = useState('');
     const [openDialog, setOpenDialog] = useState(false);
 
-    const handleClickOpen = (sourceCode) => {
+    // const [summery,setSummery] = useState('');
+    const handleClickOpen = async (sourceCode) => {
         setSelectedSourceCode(sourceCode);
         setOpenDialog(true);
+        try {
+            const api = process.env.REACT_APP_OPEN_API + "summerizeCode";
+            // http://localhost:5000/api/openai/summerizeCode
+            const response = await axios.post(api,{sourceCode})
+            console.log(response.data);
+        }catch(err) {
+            console.log(err);
+        }
     };
 
     const handleClose = () => {
@@ -27,6 +36,7 @@ export const SubmissionTable = ({ submissions }) => {
     const handleCopy = (text) => {
         navigator.clipboard.writeText(text);
     };
+
     const displaySub = (
         <Box sx={{ m: '5px' }}>
             <TableContainer>
@@ -80,7 +90,9 @@ export const SubmissionTable = ({ submissions }) => {
                         width="700px"
                         theme="light"
                         style={{ border: '1px solid red' }}
+                        readOnly
                     />
+                    
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">

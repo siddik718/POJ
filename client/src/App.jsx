@@ -24,45 +24,59 @@ import { Submission } from './Pages/Problems/Submission';
 import { AllSubmission } from './Pages/Submission/AllSubmission';
 import { UserWise } from './Pages/Submission/UserWise';
 
-import { AuthProvider } from './Context/AuthContext';
-
 import PrivateRoute from './Authoraization/PrivateRoute';
 
+import { AuthProvider } from './Context/AuthContext';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+
+import { ContestHome } from './Pages/Contest/ContestHome';
+import { AddContest } from './Pages/Contest/AddContest';
+import { ContestDetails } from './Pages/Contest/ContestDetails';
+import { Standing } from './Pages/Contest/Standing';
 
 function App() {
+  const googleClientID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
   return (
     <AuthProvider>
-      <Navbar />
-      <div style={{ minHeight: '88vh', display: 'flex', flexDirection: 'column' }}>
-        <Routes>
-          <Route path='/' element={<Home />} />
+      <GoogleOAuthProvider clientId={googleClientID}>
+        <Navbar />
+        <div style={{ minHeight: '88vh', display: 'flex', flexDirection: 'column' }}>
+          <Routes>
+            <Route path='/' element={<Home />} />
 
-          <Route element={<PrivateRoute />}>
-            <Route path='/me/:id' element={<Default />} />
-            <Route path='community/view/:id' element={<Oneblog />} />
-            <Route path='/community/update/:id' element={<Updateblog />} />
-            <Route path="/community/create-blog" element={<Createblog />} />
-            <Route path='/problems/submission/:id' element={<Submission />} />
-            <Route path='/add-problem' element={<Addproblem />} />
-            <Route path='/my/blogs' element={<Discussions />} />
-            <Route path='/submissions/my/:id' element={<UserWise />} />
-          </Route>
-
-
-          <Route path='/login' element={<Login />} />
-          <Route path='/signup' element={<Signup />} />
-          <Route path='/community' element={<Allblogs />} />
-          <Route path='/problems' element={<Allproblem />} />
-          <Route path='/problems/:id' element={<Oneproblem />} />
-
-          {/* Submission Routes */}
-          <Route path='/submissions' element={<AllSubmission />} />
+            <Route element={<PrivateRoute />}>
+              <Route path='/me/:id' element={<Default />} />
+              <Route path='community/view/:id' element={<Oneblog />} />
+              <Route path='/community/update/:id' element={<Updateblog />} />
+              <Route path="/community/create-blog" element={<Createblog />} />
+              <Route path='/problems/submission/:id' element={<Submission />} />
+              <Route path='/add-problem' element={<Addproblem />} />
+              <Route path='/my/blogs' element={<Discussions />} />
+              <Route path='/submissions/my/:id' element={<UserWise />} />
+            </Route>
 
 
+            <Route path='/login' element={<Login />} />
+            <Route path='/signup' element={<Signup />} />
 
-        </Routes>
-        <Footer />
-      </div>
+            <Route path='/community' element={<Allblogs />} />
+            <Route path='/problems' element={<Allproblem />} />
+            <Route path='/problems/:id' element={<Oneproblem />} />
+
+            {/* Submission Routes */}
+            <Route path='/submissions' element={<AllSubmission />} />
+
+
+            {/* Contest Routes */}
+            <Route path='/contest' element={<ContestHome />} />
+            <Route path='/contest/standing' element={<Standing />} />
+            <Route path='/add-contest' element={<AddContest />} />
+            <Route path='/contest/:id' element={<ContestDetails />}/>
+            
+          </Routes>
+          <Footer />
+        </div>
+      </GoogleOAuthProvider>
     </AuthProvider>
   );
 }

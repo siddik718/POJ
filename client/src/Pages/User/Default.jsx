@@ -39,8 +39,8 @@ export const Default = () => {
     getAllData();
   }, [username]);
 
-  const data = [stats.AC, stats.WA, stats.TLE, stats.CE, stats.RE];
-  const labels = ['Accepted', 'Wrong Answer', 'Time Limit Exceeded', 'Compilation Error', 'Run Time Error'];
+  const data = [stats.AC, stats.WA, stats.CE, stats.RE];
+  const labels = ['Accepted', 'Wrong Answer', 'Compilation Error', 'Run Time Error'];
 
   const dataTwo = [stats.EASY, stats.EASY_MEDIUM, stats.MEDIUM, stats.HARD_MEDIUM, stats.HARD];
   const labelsTwo = ['Easy', 'Easy Medium', 'Medium', 'Hard Medium', 'Hard'];

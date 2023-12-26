@@ -43,6 +43,16 @@ export const Oneproblem = () => {
     navigate(`/problems/submission/${id}`);
   }
 
+  const handleSummerize = async () => {
+    try {
+      const api = process.env.REACT_APP_OPEN_API + "summerizeStatement";
+      const response = await axios.post(api,{statement});
+      console.log(response.data);
+    }catch(err) {
+      console.log(err);
+    }
+  }
+
   return (
     <Container maxWidth="md">
       <CssBaseline />
@@ -106,6 +116,10 @@ export const Oneproblem = () => {
           Submit
         </Button>
       </Box>
+
+        <Button onClick={handleSummerize}> Give Me Hints </Button>
+
+
     </Container>
   );
 };

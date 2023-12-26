@@ -5,6 +5,7 @@ import { StoreData, getData } from '../Authoraization/Auth';
 import { Avatar, Box, Button, Container, CssBaseline, Grid, TextField, Typography } from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import AuthContext from '../Context/AuthContext';
+import { useGoogleOneTapLogin } from '@react-oauth/google';
 import { useContext } from 'react';
 export const Login = () => {
     const [data, setdata] = useState({
@@ -15,7 +16,7 @@ export const Login = () => {
         setdata({ ...data, [e.target.name]: e.target.value });
     }
     const { setUsername, setEmail } = useContext(AuthContext);
-    const [error , setError] = useState('');
+    const [error, setError] = useState('');
     const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -35,6 +36,33 @@ export const Login = () => {
             setError('Invalid Data,Please Try Again.')
         }
     }
+    const handleGoogleSuccess = async (credentialResponse) => {
+        const api = process.env.REACT_APP_USER_API + "googleAuth";
+        try {
+            const response = await axios.post(api, { credentialResponse });
+            if (response) {
+                StoreData(response);
+                setUsername(getData().data.username);
+                setEmail(getData().data.email);
+                navigate('/');
+            } else {
+                setError('No User Found,Please Try Again.')
+            }
+        } catch (err) {
+            setError('Invalid Data,Please Try Again.')
+        }
+    }
+    const handleGoogleError = () => {
+        setError('Login Failed.');
+    }
+    useGoogleOneTapLogin({
+        onSuccess: credentialResponse => {
+            handleGoogleSuccess(credentialResponse);
+        },
+        onError: () => {
+            handleGoogleError();
+        },
+    });
     return (
         <Container maxWidth="xs">
             <CssBaseline />
@@ -73,7 +101,7 @@ export const Login = () => {
                         value={data.password}
                         onChange={handleChange}
                     />
-                     <Typography variant="body2" color="error" align='center'>
+                    <Typography variant="body2" color="error" align='center'>
                         {error && error}
                     </Typography>
 
