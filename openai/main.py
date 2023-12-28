@@ -1,6 +1,6 @@
 from openai import OpenAI
 from secret import apiKey
-
+print(apiKey)
 client = OpenAI(api_key=apiKey)
 
 def get_completion(prompt,model="gpt-3.5-turbo-1106"):
