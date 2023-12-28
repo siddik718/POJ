@@ -3,9 +3,7 @@ import { config } from 'dotenv';
 import connectDB from './Dbconfig/db.js';
 import cors from 'cors';
 import morgan from 'morgan';
-
 const app = express();
-
 // get the .env values here.
 config();
 const PORT = process.env.PORT || 5000;
@@ -26,6 +24,8 @@ import problemRoute from './Routes/problemRoute.js'
 import submissionRoute from './Routes/submissionRoute.js'
 import openaiRoute from './Routes/openaiRoute.js'
 import contestRoute from './Routes/contestRoute.js'
+import conversationRoute from './Routes/conversationRoute.js'
+import messageRoute from './Routes/messageRoute.js'
 
 
 // urls start here
@@ -35,7 +35,10 @@ app.use('/api/problem',problemRoute);
 app.use('/api/submission',submissionRoute);
 app.use('/api/openai',openaiRoute);
 app.use('/api/contest',contestRoute);
+app.use('/api/conversation',conversationRoute);
+app.use('/api/message',messageRoute);
 
+// server.
 app.listen(PORT,()=>{
     console.log(`Server is running at http://localhost:${PORT}`);
 });

@@ -181,3 +181,15 @@ export const statistics = async (req, res) => {
     });
   }
 };
+
+// get all users username & id,
+export const allUser = async(req,res)=>{
+  try {
+    const users = await USER.find();
+    return res.status(200).json({users});
+  }catch(err) {
+    return res.status(500).json({
+      message: 'Internal Error'
+    })
+  }
+}
