@@ -25,7 +25,6 @@ const MyInnerBox = styled(Box)({
 export const Default = () => {
   const { username } = useContext(AuthContext);
   const [stats, setStats] = useState({});
-
   useEffect(() => {
     const getAllData = async () => {
       try {

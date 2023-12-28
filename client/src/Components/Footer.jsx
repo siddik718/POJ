@@ -12,7 +12,7 @@ export const Footer = () => {
     {'Copyright © '}
 
     <Link color="inherit" href="/">
-        PHub
+        POJ
     </Link>{' '}
       {new Date().getFullYear()}
       {'.'}

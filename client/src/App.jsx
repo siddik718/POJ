@@ -33,6 +33,7 @@ import { ContestHome } from './Pages/Contest/ContestHome';
 import { AddContest } from './Pages/Contest/AddContest';
 import { ContestDetails } from './Pages/Contest/ContestDetails';
 import { Standing } from './Pages/Contest/Standing';
+import Messenger from './Pages/Messenger/Messenger';
 
 function App() {
   const googleClientID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
@@ -72,6 +73,9 @@ function App() {
             <Route path='/contest/standing' element={<Standing />} />
             <Route path='/add-contest' element={<AddContest />} />
             <Route path='/contest/:id' element={<ContestDetails />}/>
+
+            {/* Message Routes */}
+            <Route path='/chat' element={<Messenger />}/>
             
           </Routes>
           <Footer />

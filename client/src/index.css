@@ -42,3 +42,34 @@ code {
   border-radius: 20px;
   height: 50vh;
 }
+.main{
+  width:100%;
+  height:800px;
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('./assests/web.jpg');
+  margin-bottom: 20px;
+}
+.text{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(25, 117, 214);
+}
+.right {
+  position: absolute;
+  right: 100px;
+  top: 10px;
+  width: 200px;
+  text-align: center;
+}
+.rightBottom {
+  border: 1px solid #ddd;
+  border-radius: 10%;
+  margin: 5px 0;
+  cursor: pointer;
+  &:hover{
+    background-color: lightgray;
+  }
+}

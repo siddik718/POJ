@@ -4,14 +4,16 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
+    const [currentUserId, setCurrentUserId] = useState('');
     useEffect(() => {
         if (haveData()) {
             setUsername(getData().data.username);
             setEmail(getData().data.email);
+            setCurrentUserId(getData().data.id)
         }
     }, []);
     return (
-        <AuthContext.Provider value={{ username, email, setUsername, setEmail }}>
+        <AuthContext.Provider value={{ username, email, setUsername, setEmail,currentUserId }}>
             {children}
         </AuthContext.Provider>
     )
