@@ -82,7 +82,7 @@ export const googleController = async (req, res) => {
       const user = new USER({
         username,
         email,
-        password : hashPassword,
+        password: hashPassword,
       });
       // saving the user to database.
       const response = await user.save();
@@ -108,6 +108,11 @@ import SUBMISSIONS from "../Models/submissionModel.js";
 export const statistics = async (req, res) => {
   const { username } = req.params;
   try {
+    const user = await USER.findOne({ username });
+    if (!user)
+      return res.status(404).json({
+        message: "No User Found",
+      });
     const blogs = await BLOG.find({ username });
     const submissions = await SUBMISSIONS.find({ username });
     // find status statistics
@@ -174,6 +179,7 @@ export const statistics = async (req, res) => {
       HARD_MEDIUM: HARD_MEDIUM.length,
       MEDIUM: MEDIUM.length,
       HARD: HARD.length,
+      ID: user._id,
     });
   } catch (err) {
     return res.status(400).json({
@@ -183,13 +189,27 @@ export const statistics = async (req, res) => {
 };
 
 // get all users username & id,
-export const allUser = async(req,res)=>{
+export const allUser = async (req, res) => {
   try {
     const users = await USER.find();
-    return res.status(200).json({users});
-  }catch(err) {
+    return res.status(200).json({ users });
+  } catch (err) {
     return res.status(500).json({
-      message: 'Internal Error'
-    })
+      message: "Internal Error",
+    });
   }
-}
+};
+
+// get one user username,
+export const sayMyName = async (req, res) => {
+  const { id } = req.params;
+  // console.log('id : ',id);
+  try {
+    const users = await USER.findById(id);
+    return res.status(200).json({ users });
+  } catch (err) {
+    return res.status(500).json({
+      message: "Internal Error",
+    });
+  }
+};

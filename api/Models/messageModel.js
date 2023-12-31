@@ -1,9 +1,5 @@
 import { Schema, model } from 'mongoose'
 const messageSchema = new Schema({
-    conversationId: {
-        type: String,
-        required: true,
-    },
     sender: {
         type: String,
         required: true,
@@ -15,6 +11,7 @@ const messageSchema = new Schema({
     message: {
         type: String,
         required: true,
+        trim: true,
     }
 },{ timestamps:true })
 const MESSAGE = model('messages',messageSchema);

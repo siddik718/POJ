@@ -1,13 +1,13 @@
 import MESSAGE from "../Models/messageModel.js";
 // save a new message.
-export const saveMessage = async(req,res) => {
-    const {conversationId,sender,receiver,message} = req.body;
+export const sendMessage = async(req,res) => {
+    const {sender,receiver,message} = req.body;
     try {
         const newMessage = new MESSAGE({
-            conversationId,sender,receiver,message
+            sender,receiver,message
         })
-        const saveMessage = await newMessage.save();
-        return res.status(200).json(saveMessage);
+        const sendMessage = await newMessage.save();
+        return res.status(201).json(sendMessage);
     }catch(err) {
         return res.status(500).json({
             message: 'Internal Error'
@@ -16,10 +16,15 @@ export const saveMessage = async(req,res) => {
 }
 // get messagess.
 export const findMessages = async(req,res)=>{
-    const {conversationId} = req.params;
+    const { sender, receiver } = req.query;
     try {
-        const message = await MESSAGE.find({conversationId});
-        return res.status(200).json(message);
+        const messages = await MESSAGE.find({
+            $or: [
+              { sender: sender, receiver: receiver },
+              { sender: receiver, receiver: sender },
+            ],
+          });
+          return res.status(200).json(messages);
     }catch(err) {
         return res.status(500).json({
             message: 'Internal Error'

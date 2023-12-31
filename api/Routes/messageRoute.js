@@ -1,9 +1,9 @@
 import express from 'express'
-import { findMessages, saveMessage } from '../Controllers/messageController.js';
+import { findMessages, sendMessage } from '../Controllers/messageController.js';
 
 const router = express.Router();
 
-router.post('/',saveMessage);
-router.get('/:conversationId',findMessages);
+router.post('/send',sendMessage);
+router.get('/get',findMessages);
 
 export default  router;
