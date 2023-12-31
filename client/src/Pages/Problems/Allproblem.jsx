@@ -45,11 +45,12 @@ export const Allproblem = () => {
         marginTop: 2,
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center'
+        alignItems: 'center',
+        
       }}
     >
       {problemsOnPage.map((problem) => (
-        <Box key={problem._id} sx={{ padding: '5px', margin: '10px', width: '100%' }} >
+        <Box key={problem._id} sx={{ padding: '5px', margin: '10px', width: '100%', }} >
           <Card>
             <CardHeader
               action={

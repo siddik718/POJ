@@ -3,8 +3,8 @@ import CodeMirror from '@uiw/react-codemirror';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, Dialog, DialogTitle, DialogContent, DialogActions, Tooltip, IconButton, Pagination, } from '@mui/material';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 export const SubmissionTable = ({ submissions }) => {
-
     const [page, setPage] = useState(1);
     const pageSize = 10;
     const totalPages = Math.ceil(submissions.length / pageSize);
@@ -16,13 +16,11 @@ export const SubmissionTable = ({ submissions }) => {
     const [selectedSourceCode, setSelectedSourceCode] = useState('');
     const [openDialog, setOpenDialog] = useState(false);
 
-    // const [summery,setSummery] = useState('');
     const handleClickOpen = async (sourceCode) => {
         setSelectedSourceCode(sourceCode);
         setOpenDialog(true);
         try {
             const api = process.env.REACT_APP_OPEN_API + "summerizeCode";
-            // http://localhost:5000/api/openai/summerizeCode
             const response = await axios.post(api,{sourceCode})
             console.log(response.data);
         }catch(err) {
@@ -36,6 +34,12 @@ export const SubmissionTable = ({ submissions }) => {
     const handleCopy = (text) => {
         navigator.clipboard.writeText(text);
     };
+const navigate = useNavigate();
+    const handleUserClick = (username)=>{
+        console.log(username);
+        // navugate()
+        navigate(`/me/${username}`);
+    }
 
     const displaySub = (
         <Box sx={{ m: '5px' }}>
@@ -59,7 +63,7 @@ export const SubmissionTable = ({ submissions }) => {
                                 <TableCell>{sub.submissionID}</TableCell>
                                 <TableCell>{sub.title}</TableCell>
                                 <TableCell>{sub.difficulty}</TableCell>
-                                <TableCell>{sub.username}</TableCell>
+                                <TableCell onClick={()=>handleUserClick(sub.username)} className='pointer'>{sub.username}</TableCell>
                                 <TableCell>{new Date(sub.updatedAt).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' })}</TableCell>
                                 <TableCell>{sub.status}</TableCell>
                                 <TableCell>{sub.language}</TableCell>

@@ -12,7 +12,7 @@ const BlogCard = ({ blog }) => {
     const content = parse(blog.content);
     const subHeader = "By " + blog.username + " At " + new Date(blog.updatedAt).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' });
     return (
-        <Card variant="outlined" sx={{ margin: '16px' }} >
+        <Card variant="outlined" sx={{ margin: '16px',boxShadow: '-6px 6px 15px -5px rgba(28,59,120,1)' }} >
             <CardHeader avatar={
                 <Avatar sx={{ bgcolor: red[500] }}>
                     {blog.username[0].toUpperCase()}

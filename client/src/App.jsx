@@ -54,6 +54,7 @@ function App() {
               <Route path='/add-problem' element={<Addproblem />} />
               <Route path='/my/blogs' element={<Discussions />} />
               <Route path='/submissions/my/:id' element={<UserWise />} />
+              <Route path='message/:id' element={<Messenger />} />
             </Route>
 
 
@@ -73,9 +74,6 @@ function App() {
             <Route path='/contest/standing' element={<Standing />} />
             <Route path='/add-contest' element={<AddContest />} />
             <Route path='/contest/:id' element={<ContestDetails />}/>
-
-            {/* Message Routes */}
-            <Route path='/chat' element={<Messenger />}/>
             
           </Routes>
           <Footer />

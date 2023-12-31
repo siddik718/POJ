@@ -2,9 +2,11 @@ import { getData, haveData } from '../Authoraization/Auth';
 import { useState,createContext,useEffect } from 'react';
 const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
+    
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [currentUserId, setCurrentUserId] = useState('');
+
     useEffect(() => {
         if (haveData()) {
             setUsername(getData().data.username);
