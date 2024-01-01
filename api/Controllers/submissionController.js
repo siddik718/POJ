@@ -72,7 +72,7 @@ export const test = async (req,res) => {
 
       setTimeout(async ()=>{
         const responseTwo = await getSubmission(response.token);
-        console.log(responseTwo);
+        // console.log(responseTwo);
         // store the result 
         const tot = await SUBMISSION.find();
         const submission = new SUBMISSION({

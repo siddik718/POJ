@@ -1,10 +1,11 @@
 import CONTEST from "../Models/contestModel.js";
 import dayjs from "dayjs";
 
-export const addProblem = async (req, res) => {
+export const addContest = async (req, res) => {
   try {
-    const { startTime, endTime, problems } = req.body;
+    const { title,startTime, endTime, problems } = req.body;
     const newContest = new CONTEST({
+      title,
       startTime,
       endTime,
       problems,
@@ -26,13 +27,10 @@ export const getALL = async (req, res) => {
     const currentDateUTC = dayjs().toISOString();
     const allContest = await CONTEST.find().sort({startTime: 1});
 
-    // console.log(allContest[0].startTime);
-    // console.log(currentDateUTC);
-
     const upcoming = await CONTEST.aggregate([
       {
         $match: {
-          startTime: { $gte: new Date(currentDateUTC) },
+          endTime: { $gte: new Date(currentDateUTC) },
         },
       },
       {
@@ -44,7 +42,7 @@ export const getALL = async (req, res) => {
     const past = await CONTEST.aggregate([
       {
         $match: {
-          startTime: { $lt: new Date(currentDateUTC) },
+          endTime: { $lt: new Date(currentDateUTC) },
         },
       },
       {

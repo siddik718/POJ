@@ -13,7 +13,7 @@ export const allProblem = async (req, res) => {
 
 export const oneProblem = async (req, res) => {
   const { id } = req.params;
-  
+
   try {
     const problem = await PROBLEMS.findById(id);
     if (!problem) {
@@ -42,17 +42,17 @@ export const addProblem = async (req, res) => {
     selectedTags,
     difficulty,
   } = req.body;
-   console.log('Username ' + username); // 0
-        console.log('Title' + title); // 1
-        console.log('statement' + statement); // 2
-        console.log('sampleInput' + sampleInput); // 3
-        console.log('sampleOutput' + sampleOutput); // 4
-        console.log('input' + input); // 5
-        console.log('output' + output); // 6
-        console.log('timeLimit' + timeLimit); // 7
-        console.log('memoryLimit' + memoryLimit); // 8
-        console.log('tags' + selectedTags); // 9
-        console.log('difficulty' + difficulty); // 10
+  console.log("Username " + username); // 0
+  console.log("Title" + title); // 1
+  console.log("statement" + statement); // 2
+  console.log("sampleInput" + sampleInput); // 3
+  console.log("sampleOutput" + sampleOutput); // 4
+  console.log("input" + input); // 5
+  console.log("output" + output); // 6
+  console.log("timeLimit" + timeLimit); // 7
+  console.log("memoryLimit" + memoryLimit); // 8
+  console.log("tags" + selectedTags); // 9
+  console.log("difficulty" + difficulty); // 10
   try {
     // check if same title problem exist.
     const alreadyHave = await PROBLEMS.findOne({ title });
@@ -61,7 +61,7 @@ export const addProblem = async (req, res) => {
         message: "Problem Already Exist.",
       });
     }
-    const memoryLimitMbToKb = Math.min(262144,memoryLimit * 1024);
+    const memoryLimitMbToKb = Math.min(262144, memoryLimit * 1024);
     // save the problem to db
     const newProblem = new PROBLEMS({
       username,
@@ -72,7 +72,7 @@ export const addProblem = async (req, res) => {
       input,
       output,
       timeLimit,
-      memoryLimit:memoryLimitMbToKb,
+      memoryLimit: memoryLimitMbToKb,
       selectedTags,
       difficulty,
     });
@@ -83,3 +83,15 @@ export const addProblem = async (req, res) => {
     return res.status(500).json("Internal Error");
   }
 };
+
+export const getByName = async(req,res) => {
+  const {title} = req.query;
+  try {
+      const problem = await PROBLEMS.findOne({ title });
+      return res.status(200).json(problem);
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Internal Error',
+    })
+  }
+}

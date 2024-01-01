@@ -24,9 +24,8 @@ import problemRoute from './Routes/problemRoute.js'
 import submissionRoute from './Routes/submissionRoute.js'
 import openaiRoute from './Routes/openaiRoute.js'
 import contestRoute from './Routes/contestRoute.js'
-import conversationRoute from './Routes/conversationRoute.js'
 import messageRoute from './Routes/messageRoute.js'
-
+import standingRoute from './Routes/standingRoute.js'
 
 // urls start here
 app.use("/api/user",userRoute);
@@ -35,8 +34,8 @@ app.use('/api/problem',problemRoute);
 app.use('/api/submission',submissionRoute);
 app.use('/api/openai',openaiRoute);
 app.use('/api/contest',contestRoute);
-app.use('/api/conversation',conversationRoute);
 app.use('/api/message',messageRoute);
+app.use('/api/standing',standingRoute);
 
 // server.
 app.listen(PORT,()=>{
