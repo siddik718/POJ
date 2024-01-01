@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import HTMLReactParser from 'html-react-parser';
 import {
@@ -17,8 +17,10 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 export const Oneproblem = () => {
   const { id } = useParams();
+  const {state} = useLocation();
   const [data, setData] = useState('');
-
+  console.log('ID : ' , id);
+  console.log('State : ' , state);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -40,7 +42,7 @@ export const Oneproblem = () => {
   };
   const navigate = useNavigate();
   const handleSubmit = () => {
-    navigate(`/problems/submission/${id}`);
+    navigate(`/problems/submission/${id}`,{state : state});
   }
 
   const handleSummerize = async () => {

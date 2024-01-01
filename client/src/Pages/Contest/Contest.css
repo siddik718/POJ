@@ -1,0 +1,38 @@
+.problems {
+    width: 100%;
+    height: calc(100vh - 250px);
+}
+.problem {
+    margin: 10px;
+    padding: 10px;
+    cursor:pointer;
+    width: 50%;
+    background-color:#e0e0e0;
+    font-size: larger;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 400;
+    border-radius: 10px;
+    text-align: center;
+}
+.middle {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+}
+.before.middle{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: calc(100vh - 250px);
+    font-size: 3rem;
+    color:rgb(20, 18, 14)
+}
+.space-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

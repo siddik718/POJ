@@ -21,7 +21,8 @@ const MyInnerBox = styled(Box)({
   justifyContent: 'center',
   alignItems: 'center',
   height: '100%',
-  
+  flex:'6',
+  padding: '5px 0',
 });
 
 export const Default = () => {
@@ -64,13 +65,13 @@ export const Default = () => {
                 Username: {currentUserProfile}
               </Typography>
               <Typography variant="h5" component='h5' color="darkgray">
-                disscuissions : {stats.blogs}
+                Disscuissions : {stats.blogs}
               </Typography>
-              <Typography variant="h5" component='h5' color="success">
-                submissions : {stats.submissions}
+              <Typography variant="h5" component='h5' color="darkgray">
+                Submissions : {stats.submissions}
               </Typography>
-              <Typography variant="h5" component='h5' color="success">
-                solved : {stats.AC}
+              <Typography variant="h5" component='h5' color="darkgray">
+                Accepted : {stats.AC}
               </Typography>
               {currentUserProfile !== username &&
                 <Button variant="outlined" color="primary" onClick={() => handleSendClick(stats.ID)}>

@@ -23,14 +23,14 @@ export const Allcontest = () => {
   return (
     <div>
       <div>
-        <p>Up Coming Contests : </p>
+        <p>Contests : </p>
         {upcoming && upcoming.map((con) => (
           <div key={con._id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
-              {con.startTime}
+              {con.title}
             </div>
             <div>
-              <button onClick={() => navigate(`/contest/${con._id}`)}>Go To Contest</button>
+              <button onClick={() => navigate(`/contest/${con._id}`)} style={{ marginLeft: '10px' }}>Go To Contest</button>
             </div>
           </div>
         ))}
@@ -40,7 +40,7 @@ export const Allcontest = () => {
         <p>Past Contests: </p>
         {past && past.map((con) => (
           <div key={con._id}>
-            {con.startTime}
+            {con.title}
           </div>
         ))}
       </div>

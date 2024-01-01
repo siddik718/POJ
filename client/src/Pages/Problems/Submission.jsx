@@ -1,7 +1,7 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { Alert, Backdrop, Box, Button, CircularProgress, Collapse, Container, CssBaseline, FormControl, IconButton, InputLabel, MenuItem, Select } from '@mui/material';
 import AuthContext from '../../Context/AuthContext';
 import CloseIcon from '@mui/icons-material/Close';
@@ -9,10 +9,12 @@ import CloseIcon from '@mui/icons-material/Close';
 
 export const Submission = () => {
   const { id } = useParams();
+  const { state } = useLocation();
   const [source_code, setSource_code] = useState('print ("Hello World"); ');
   const onChange = (val, viewUpdate) => {
     setSource_code(val);
   };
+  console.log('State : ', state);
   const [language, setLanguage] = useState('PYTHON3');
   const handleChange = (event) => {
     setLanguage(event.target.value);
@@ -31,36 +33,42 @@ export const Submission = () => {
       const res = await axios.post(api + "test/", {
         username, source_code, language, id
       });
-      // alert(res.data);
       setOpen(true);
       setLoding(false);
       setRuslt(res.data.responseTwo.description);
-      console.log(res.data);
-      console.log(res.data.responseTwo.description);
     } catch (err) {
       console.log(err);
     }
   }
+  useEffect(() => {
+    if (state === null || result === "") return;
+    const submitToContest = async () => {
+      const api = process.env.REACT_APP_STANDING_API;
+      const r = await axios.post(api, { score: result === 'Accepted' ? 1 : -1, username, contestID: state });
+      console.log('After Submitted To Contest : ', r);
+    }
+    submitToContest();
+  }, [result, state, username])
   const showResult = (
     <Collapse in={open}>
-        <Alert
-          action={
-            <IconButton
-              aria-label="close"
-              color="inherit"
-              size="small"
-              onClick={() => {
-                setOpen(false);
-              }}
-            >
-              <CloseIcon fontSize="inherit" />
-            </IconButton>
-          }
-          sx={{ mb: 2 }}
-        >
-          { result }
-        </Alert>
-      </Collapse>
+      <Alert
+        action={
+          <IconButton
+            aria-label="close"
+            color="inherit"
+            size="small"
+            onClick={() => {
+              setOpen(false);
+            }}
+          >
+            <CloseIcon fontSize="inherit" />
+          </IconButton>
+        }
+        sx={{ mb: 2 }}
+      >
+        {result}
+      </Alert>
+    </Collapse>
   )
   return (
     <Container>
@@ -68,7 +76,7 @@ export const Submission = () => {
 
       <Box sx={{ maxWidth: '80%', margin: '10px', padding: '10px' }}>
         <Box sx={{ maxWidth: '100%', padding: '10px' }}>
-          {result && showResult }
+          {result && showResult}
           <FormControl fullWidth>
             <InputLabel id="Select-Language">Select Language</InputLabel>
             <Select

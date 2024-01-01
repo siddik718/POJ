@@ -32,8 +32,10 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { ContestHome } from './Pages/Contest/ContestHome';
 import { AddContest } from './Pages/Contest/AddContest';
 import { ContestDetails } from './Pages/Contest/ContestDetails';
-import { Standing } from './Pages/Contest/Standing';
+
 import Messenger from './Pages/Messenger/Messenger';
+import PageNotFound from './Pages/PageNotFound/PageNotFound';
+import PrivateRouteForContest from './Authoraization/PrivateRouteForContest';
 
 function App() {
   const googleClientID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
@@ -50,7 +52,6 @@ function App() {
               <Route path='community/view/:id' element={<Oneblog />} />
               <Route path='/community/update/:id' element={<Updateblog />} />
               <Route path="/community/create-blog" element={<Createblog />} />
-              <Route path='/problems/submission/:id' element={<Submission />} />
               <Route path='/add-problem' element={<Addproblem />} />
               <Route path='/my/blogs' element={<Discussions />} />
               <Route path='/submissions/my/:id' element={<UserWise />} />
@@ -66,15 +67,19 @@ function App() {
             <Route path='/problems/:id' element={<Oneproblem />} />
 
             {/* Submission Routes */}
+            <Route element={<PrivateRouteForContest />}>
             <Route path='/submissions' element={<AllSubmission />} />
+            <Route path='/problems/submission/:id' element={<Submission />} />
+            </Route>
 
 
             {/* Contest Routes */}
             <Route path='/contest' element={<ContestHome />} />
-            <Route path='/contest/standing' element={<Standing />} />
             <Route path='/add-contest' element={<AddContest />} />
             <Route path='/contest/:id' element={<ContestDetails />}/>
-            
+
+            <Route path='/*' element={<PageNotFound />}/>
+
           </Routes>
           <Footer />
         </div>

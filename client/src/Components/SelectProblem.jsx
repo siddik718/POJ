@@ -11,9 +11,9 @@ export default function MultipleSelectCheckmarks({ problems, selectedProblems, o
                 renderValue={(selected) => selected.join(', ')}
             >
                 {problems.map((problem) => (
-                    <MenuItem key={problem} value={problem}>
-                        <Checkbox checked={selectedProblems.indexOf(problem) > -1} />
-                        <ListItemText primary={problem} />
+                    <MenuItem key={problem._id} value={problem.title}>
+                        <Checkbox checked={selectedProblems.indexOf(problem.title) > -1} />
+                        <ListItemText primary={problem?.title} />
                     </MenuItem>
                 ))}
             </Select>
