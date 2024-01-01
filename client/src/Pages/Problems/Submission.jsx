@@ -5,7 +5,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import { Alert, Backdrop, Box, Button, CircularProgress, Collapse, Container, CssBaseline, FormControl, IconButton, InputLabel, MenuItem, Select } from '@mui/material';
 import AuthContext from '../../Context/AuthContext';
 import CloseIcon from '@mui/icons-material/Close';
-
+import { StoreProblem, getVerdict, haveProblem } from '../../helper/contestHelper';
 
 export const Submission = () => {
   const { id } = useParams();
@@ -40,15 +40,27 @@ export const Submission = () => {
       console.log(err);
     }
   }
+
   useEffect(() => {
     if (state === null || result === "") return;
+
+    // check if this problem is already a accepted problem.
+    console.log('problemNo : ',state.problemNO)
+    if(haveProblem(state.problemNO) && getVerdict(state.problemNO) === 'Accepted') {
+      console.log('problemNo inSide: ',state.problemNO)
+      return;
+    }
+    console.log('problemNo outSide: ',state.problemNO)
+    StoreProblem(state.problemNO,result);
+    
     const submitToContest = async () => {
       const api = process.env.REACT_APP_STANDING_API;
-      const r = await axios.post(api, { score: result === 'Accepted' ? 1 : -1, username, contestID: state });
+      const r = await axios.post(api, { score: result === 'Accepted' ? 1 : -0.01, username, contestID: state.contestID });
       console.log('After Submitted To Contest : ', r);
     }
     submitToContest();
   }, [result, state, username])
+
   const showResult = (
     <Collapse in={open}>
       <Alert

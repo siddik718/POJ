@@ -24,18 +24,20 @@ import { Submission } from './Pages/Problems/Submission';
 import { AllSubmission } from './Pages/Submission/AllSubmission';
 import { UserWise } from './Pages/Submission/UserWise';
 
-import PrivateRoute from './Authoraization/PrivateRoute';
-
-import { AuthProvider } from './Context/AuthContext';
-import { GoogleOAuthProvider } from '@react-oauth/google';
-
 import { ContestHome } from './Pages/Contest/ContestHome';
 import { AddContest } from './Pages/Contest/AddContest';
 import { ContestDetails } from './Pages/Contest/ContestDetails';
 
+import { AuthProvider } from './Context/AuthContext';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+
 import Messenger from './Pages/Messenger/Messenger';
+
 import PageNotFound from './Pages/PageNotFound/PageNotFound';
+
+import PrivateRoute from './Authoraization/PrivateRoute';
 import PrivateRouteForContest from './Authoraization/PrivateRouteForContest';
+import OldContest from './Pages/Contest/OldContest';
 
 function App() {
   const googleClientID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
@@ -56,6 +58,11 @@ function App() {
               <Route path='/my/blogs' element={<Discussions />} />
               <Route path='/submissions/my/:id' element={<UserWise />} />
               <Route path='message/:id' element={<Messenger />} />
+              <Route path='/contest/:id' element={<ContestDetails />} />
+            </Route>
+
+            <Route element={<PrivateRouteForContest />}>
+              <Route path='/submissions' element={<AllSubmission />} />
             </Route>
 
 
@@ -67,18 +74,16 @@ function App() {
             <Route path='/problems/:id' element={<Oneproblem />} />
 
             {/* Submission Routes */}
-            <Route element={<PrivateRouteForContest />}>
-            <Route path='/submissions' element={<AllSubmission />} />
             <Route path='/problems/submission/:id' element={<Submission />} />
-            </Route>
 
 
             {/* Contest Routes */}
             <Route path='/contest' element={<ContestHome />} />
             <Route path='/add-contest' element={<AddContest />} />
-            <Route path='/contest/:id' element={<ContestDetails />}/>
+            <Route path='/standing/:id' element={<OldContest />} />
 
-            <Route path='/*' element={<PageNotFound />}/>
+
+            <Route path='/*' element={<PageNotFound />} />
 
           </Routes>
           <Footer />

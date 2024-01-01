@@ -1,5 +1,4 @@
 import {model,Schema} from 'mongoose';
-
 const contestSchema = new Schema({
     title: {
         type: String,

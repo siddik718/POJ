@@ -30,7 +30,7 @@ const Standing = ({ contestID }) => {
         </thead>
         <tbody>
           {standings.length > 0 && standings.map((standing, index) => (
-            <tr key={index}>
+            <tr key={index} className='space-between'>
               <td>{index + 1}</td>
               <td>{standing.username}</td>
               <td>{Math.max(standing.score,0)}</td>

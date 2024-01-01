@@ -23,7 +23,7 @@ export const Allcontest = () => {
   return (
     <div>
       <div>
-        <p>Contests : </p>
+        <p> Ongoing Contests : </p>
         {upcoming && upcoming.map((con) => (
           <div key={con._id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
@@ -39,9 +39,14 @@ export const Allcontest = () => {
       <div>
         <p>Past Contests: </p>
         {past && past.map((con) => (
-          <div key={con._id}>
+          <div key={con._id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center',margin:'5px 0' }}>
+          <div >
             {con.title}
           </div>
+          <div>
+            <button onClick={() => navigate(`/standing/${con._id}`)} style={{ marginLeft: '10px' }}>Visit Standing</button>
+          </div>
+        </div>
         ))}
       </div>
     </div>

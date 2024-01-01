@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { getData, haveData } from '../Authoraization/Auth';
 import { useState,createContext,useEffect } from 'react';
 const AuthContext = createContext();
@@ -6,7 +5,6 @@ export const AuthProvider = ({ children }) => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [currentUserId, setCurrentUserId] = useState('');
-    const [contestRunning,setContestRunning] = useState(false);
 
     useEffect(() => {
         if (haveData()) {
@@ -22,8 +20,6 @@ export const AuthProvider = ({ children }) => {
             setUsername, 
             setEmail,
             currentUserId,
-            contestRunning,
-            setContestRunning, 
         }}>
             {children}
         </AuthContext.Provider>

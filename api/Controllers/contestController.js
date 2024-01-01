@@ -77,3 +77,19 @@ export const getOne = async(req,res) => {
     })
   }
 }
+
+export const isAnyRunningNow = async(req,res) => {
+  const now = dayjs().toISOString()
+  // return res.json(now);
+  try {
+    const upcoming = await CONTEST.aggregate([{
+      $match: { endTime: { $gte: new Date(now) }}
+      }]);
+      let running = false;
+      if(upcoming)running = true;
+    return res.status(200).json({
+      upcoming,running});
+  }catch(err) {
+    return res.status(500).json(err);
+  }
+}

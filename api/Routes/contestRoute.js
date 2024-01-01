@@ -1,10 +1,11 @@
 import express from 'express';
-import { addContest,getALL,getOne } from '../Controllers/contestController.js';
+import { addContest,getALL,getOne, isAnyRunningNow } from '../Controllers/contestController.js';
 
 const router = express.Router();
 
-router.post("/add",addContest);
+router.get('/now',isAnyRunningNow);
 router.get("/getALL",getALL);
 router.get("/:id",getOne);
+router.post("/add",addContest);
 
 export default router;

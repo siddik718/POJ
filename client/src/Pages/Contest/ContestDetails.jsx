@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { GT, GTE, diffData, timeDiff } from "../../helper/DateReleted";
 import dayjs from 'dayjs';
@@ -9,7 +9,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Dashboard from './Dashboard';
 import Standing from './Standing';
-import AuthContext from '../../Context/AuthContext';
+import { deleteContestData } from '../../helper/contestHelper';
 export const ContestDetails = () => {
     const { id } = useParams();
     const [contest, setContest] = useState([]);
@@ -29,15 +29,12 @@ export const ContestDetails = () => {
     const [currentTime, setCurrentTime] = useState(dayjs().toISOString());
     const [waitTime, setWaitTime] = useState([]);
     const [duration, setDuration] = useState([]);
-    const { setContestRunning } = useContext(AuthContext);
     useEffect(() => {
         let interval = setInterval(() => {
             setCurrentTime(dayjs().toISOString());
             if (GTE(contest.startTime, currentTime)) {
-                setContestRunning(false);
                 setWaitTime(diffData(timeDiff(contest.startTime, currentTime)))
             } else {
-                setContestRunning(true);
                 setWaitTime([]);
                 if (GTE(contest.endTime, currentTime)) {
                     setDuration(diffData(timeDiff(contest.endTime, currentTime)));
@@ -48,18 +45,19 @@ export const ContestDetails = () => {
         }, 1000);
 
         return () => clearInterval(interval);
-    }, [contest.startTime, currentTime, contest.endTime, setContestRunning])
-    const navigate = useNavigate();
+    }, [contest.startTime, currentTime, contest.endTime])
     const [value, setValue] = useState('2');
     const handleChange = (event, newValue) => {
         setValue(newValue);
     }
-
     return (
         <div>
             {GTE(currentTime, contest.startTime) ? (
                 GT(currentTime, contest.endTime) ? (
-                    navigate(-1)
+                    <>
+                    {deleteContestData()}
+                    <Standing contestID={contest._id} /> 
+                    </>
                 ) : (
                     <>
                         <div className='middle'>
@@ -81,16 +79,13 @@ export const ContestDetails = () => {
                                 width: '30%',
                                 margin: '10px',
                                 padding: '10px',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
                             }} >
                                 <Box sx={{
                                     padding: '50px',
                                     fontSize: '3em',
-                                    color: 'dark',
+                                    color: '#c20404',
                                 }}>
-                                    Contest ends in {duration}
+                                    Contest Ends in {duration}
                                 </Box>
                             </Box>
                         </div>
@@ -98,7 +93,7 @@ export const ContestDetails = () => {
                     </>
                 )
             ) : (
-                <div className='before middle'> Contest starts in {waitTime} </div>
+                <div className='before middle'> Contest Starts in {waitTime} </div>
             )}
         </div>
     )
