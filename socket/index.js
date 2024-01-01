@@ -13,9 +13,7 @@ io.on("connection", (socket) => {
         console.log("online User : ", onlineUser);
     })
     io.emit('getOnlineUser',onlineUser);
-
     // add message.
-
     socket.on('sendMessage',(data)=>{
         console.log('send data : ',data);
         const user = onlineUser.find(user=>user.userId === data.receiver);
@@ -23,8 +21,6 @@ io.on("connection", (socket) => {
             io.to(user.socketId).emit('getMessage',data)
         }
     })
-
-
     socket.on('disconnect',()=>{
         onlineUser = onlineUser.filter(user=>user.socketId !== socket.id);
         console.log('A user is disconnected');
