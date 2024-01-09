@@ -2,6 +2,7 @@ import CONTEST from "../Models/contestModel.js";
 import dayjs from "dayjs";
 
 export const addContest = async (req, res) => {
+  // return res.status(200).json({message: 'Inside add contest'});
   try {
     const { title,startTime, endTime, problems } = req.body;
     const newContest = new CONTEST({
@@ -47,7 +48,7 @@ export const getALL = async (req, res) => {
       },
       {
         $sort: {
-          startTime: 1,
+          startTime: -1,
         },
       },
     ]);
@@ -80,13 +81,15 @@ export const getOne = async(req,res) => {
 
 export const isAnyRunningNow = async(req,res) => {
   const now = dayjs().toISOString()
-  // return res.json(now);
   try {
+    // check if now >= startTime and now <= EndTime
     const upcoming = await CONTEST.aggregate([{
-      $match: { endTime: { $gte: new Date(now) }}
-      }]);
-      let running = false;
-      if(upcoming)running = true;
+      $match: {
+        startTime: { $lte: new Date(now) }, // Check if now is after or equal to startTime
+        endTime: { $gte: new Date(now) },   // Check if now is before or equal to endTime
+      }
+    }]);
+    const running = (upcoming && upcoming.length > 0);
     return res.status(200).json({
       upcoming,running});
   }catch(err) {

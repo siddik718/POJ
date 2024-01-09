@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import dayjs from 'dayjs'
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
@@ -8,6 +8,7 @@ import { Box, Button, Container, TextField, Typography } from '@mui/material'
 import SelectProblem from '../../Components/SelectProblem'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import AuthContext from '../../Context/AuthContext'
 export const AddContest = () => {
     const [startTime, setStartTime] = useState(dayjs());
     const [endTime, setEndTime] = useState(dayjs());
@@ -32,6 +33,9 @@ export const AddContest = () => {
         const { target: { value } } = event;
         setSelectedProblems(typeof value === 'string' ? value.split(',') : value);
     };
+
+    const {currentUserId} = useContext(AuthContext);
+
     const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -41,7 +45,8 @@ export const AddContest = () => {
                 title: title,
                 startTime: startTime.format(),
                 endTime: endTime.format(),
-                problems: selectedProblems
+                problems: selectedProblems,
+                id: currentUserId,
             })
             console.log(response)
             navigate(-1);

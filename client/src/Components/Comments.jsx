@@ -2,6 +2,7 @@ import { Box, Pagination, Typography } from '@mui/material'
 import HTMLReactParser from 'html-react-parser';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useState } from 'react';
+import { FORMAT } from '../helper/DateReleted';
 
 const Comments = ({ comments }) => {
     const [page, setPage] = useState(1); // current Page
@@ -16,14 +17,14 @@ const Comments = ({ comments }) => {
 
     // Get the comments for the current page
     const commentsOnPage = comments.slice(startIndex, endIndex + 1);
-    
+
     // get all the comments of current page
     const allComments = (commentsOnPage.map((com) => (
         <Box key={com._id} sx={{ border: '1px solid #ddd', borderRadius: '20px', marginBottom: '5px' }}>
             <Box sx={{ m: '10px', display: 'flex', justifyContent: 'left', alignItems: 'center' }}>
                 <AccountCircleIcon />
                 <Typography variant="body2" color="#333" marginLeft={'5px'}>
-                    {com.username}  At {new Date(com.updatedAt).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' })}
+                    {com.username}  At {FORMAT(com.updatedAt)}
                 </Typography>
             </Box>
             <Box sx={{

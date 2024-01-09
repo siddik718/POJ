@@ -12,15 +12,19 @@ import {
   Button,
   IconButton,
   Tooltip,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Dialog,
 } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 export const Oneproblem = () => {
   const { id } = useParams();
-  const {state} = useLocation();
+  const { state } = useLocation();
   const [data, setData] = useState('');
-  console.log('ID : ' , id);
-  console.log('State : ' , state);
+  console.log('ID : ', id);
+  console.log('State : ', state);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -42,21 +46,55 @@ export const Oneproblem = () => {
   };
   const navigate = useNavigate();
   const handleSubmit = () => {
-    navigate(`/problems/submission/${id}`,{state : state});
+    navigate(`/problems/submission/${id}`, { state: state });
   }
-
+  const [openDialog, setOpenDialog] = useState(false);
+  const [answer,setAnswer] = useState("");
   const handleSummerize = async () => {
+    setOpenDialog(true);
+    setAnswer("");
     try {
       const api = process.env.REACT_APP_OPEN_API + "summerizeStatement";
-      const response = await axios.post(api,{statement});
-      console.log(response.data);
-    }catch(err) {
+
+      const response = await fetch(api, {
+        method: "post",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userPrompt: statement }),
+      });
+      if (!response.ok || !response.body) {
+        throw new Error(response.statusText);
+      }
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) {
+          break;
+        }
+        const decodedChunk = decoder.decode(value, { stream: true });
+        // console.log(decodedChunk)
+        setAnswer((prev)=>prev+decodedChunk);
+      }
+      // const response = await axios.post(api,{statement});
+      // console.log(response.data);
+    } catch (err) {
       console.log(err);
     }
   }
-
+  const handleClose = () => {
+    setOpenDialog(false);
+  };
+  const jsxContent = answer.split('\n').map((line, index) => (
+    <React.Fragment key={index}>
+      {line}
+      <br />
+    </React.Fragment>
+  ));
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="xl">
       <CssBaseline />
       <Box
         sx={{
@@ -76,13 +114,14 @@ export const Oneproblem = () => {
           <Typography>Output: Standard Output</Typography>
         </Paper>
 
+       
         <Paper sx={{ padding: 2, marginBottom: 4 }}>
           <Typography variant="h6">Problem Statement:</Typography>
           <Box variant="body1">{statement && HTMLReactParser(statement)} </Box>
         </Paper>
 
         <Grid container spacing={2} sx={{ marginBottom: 4 }}>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12}>
             <Paper sx={{ padding: 2 }}>
               <Typography variant="h6">Sample Input:</Typography>
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -91,14 +130,14 @@ export const Oneproblem = () => {
                 </Typography>
                 <Tooltip title="Copy to Clipboard">
                   <IconButton onClick={() => handleCopy(sampleInput)} color="primary">
-                    <ContentCopyIcon fontSize='small'/>
+                    <ContentCopyIcon fontSize='small' />
                   </IconButton>
                 </Tooltip>
               </Box>
             </Paper>
           </Grid>
 
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12}>
             <Paper sx={{ padding: 2 }}>
               <Typography variant="h6">Sample Output:</Typography>
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -107,20 +146,39 @@ export const Oneproblem = () => {
                 </Typography>
                 <Tooltip title="Copy to Clipboard">
                   <IconButton onClick={() => handleCopy(sampleOutput)} color="primary">
-                    <ContentCopyIcon fontSize='small'/>
+                    <ContentCopyIcon fontSize='small' />
                   </IconButton>
                 </Tooltip>
               </Box>
             </Paper>
           </Grid>
         </Grid>
-        <Button variant="contained" color="primary" onClick={handleSubmit}>
-          Submit
-        </Button>
+        <Box sx={{
+          display:'flex',
+          justifyContent:'space-between',
+          alignItems:'center',
+          width: '100%',
+          padding: '0 20%',
+        }}>
+        <Button variant="contained" color="primary" onClick={handleSubmit}>Submit</Button>
+        <Typography variant="body2" color="initial"> Or </Typography>
+        <Button variant="contained" color="primary" onClick={handleSummerize}> Get Help From AI </Button>  
+        </Box>
       </Box>
 
-        <Button onClick={handleSummerize}> Give Me Hints </Button>
+      
 
+      <Dialog open={openDialog} onClose={handleClose} maxWidth="md" fullWidth>
+        <DialogTitle>Summery</DialogTitle>
+        <DialogContent>
+          <Box sx={{ display: 'flex', justifyContent: 'end', alignItems: 'center',minWidth:'400px' }}>
+              {jsxContent}
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="warning">Close</Button>
+        </DialogActions>
+      </Dialog>
 
     </Container>
   );

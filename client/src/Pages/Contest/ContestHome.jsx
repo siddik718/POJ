@@ -22,7 +22,7 @@ const SecondBox = styled(Box)({
 export const ContestHome = () => {
   const navigate = useNavigate();
   const handleAddButton = () => {
-    navigate('/add-contest');
+      navigate('/add-contest');
   }
 
   return (

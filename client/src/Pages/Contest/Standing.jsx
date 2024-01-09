@@ -18,11 +18,11 @@ const Standing = ({ contestID }) => {
     fetchStanding();
   }, [contestID]);
   return (
-    <div>
+    <div className='standing-table'>
       <h2>Standings</h2>
-      <table style={{ width:'100%' }}>
+      <table >
         <thead>
-          <tr className='space-between'>
+          <tr>
             <th>Rank</th>
             <th>Username</th>
             <th>Total Score</th>
@@ -30,7 +30,7 @@ const Standing = ({ contestID }) => {
         </thead>
         <tbody>
           {standings.length > 0 && standings.map((standing, index) => (
-            <tr key={index} className='space-between'>
+            <tr key={index}>
               <td>{index + 1}</td>
               <td>{standing.username}</td>
               <td>{Math.max(standing.score,0)}</td>

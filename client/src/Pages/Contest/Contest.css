@@ -1,4 +1,4 @@
-.problems {
+/* .problems {
   width: 100%;
   height: calc(100vh - 250px);
 }
@@ -18,7 +18,6 @@
   text-align: center;
   display: flex;
   justify-content: center;
-  /* align-items: center; */
 }
 .before.middle {
   text-align: center;
@@ -31,31 +30,32 @@
   font-size: 3rem;
   color: rgb(20, 18, 14);
 }
-.space-between {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 table {
   border-collapse: collapse;
   width: 100%;
   margin-top: 15px;
 }
 
-thead th {
+thead th{
   background-color: #ead9d9;
-  padding: 10px;
-  text-align: left;
-  border-radius: 20px;
+  padding: 15px;
+  text-align: center;
+  color: #333;
 }
 
 tbody td {
-  /* border: 1px solid #ddd; */
-  padding: 10px;
+  border: 2px solid #e6d8d8;
+  padding: 15px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
 }
 
-tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
+tbody tr:nth-child(odd) {
+  background-color: #d6dfe5;
+}
+tbody tr:nth-of-type(even) {
+  background-color: #ccdbe6;
 }
 
 .space-between th,
@@ -68,3 +68,31 @@ h2 {
   margin-bottom: 10px;
   text-align: center;
 }
+.standing-table {
+  margin: 50px 55px;
+}
+.all-contest-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.half-contest-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+}
+.contest-details {
+  border: 1px solid rgb(198, 171, 171);
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 60%;
+  padding: 10px;
+}
+.standing-go-btn {
+  padding: 10px;
+} */

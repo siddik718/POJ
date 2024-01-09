@@ -4,13 +4,14 @@ import { red } from '@mui/material/colors';
 import ReadMoreIcon from '@mui/icons-material/ReadMore';
 import { useNavigate } from 'react-router-dom';
 import parse from 'html-react-parser';
+import { FORMAT } from '../helper/DateReleted';
 const BlogCard = ({ blog }) => {
     const navigate = useNavigate();
     const handleClick = (id) => {
         navigate(`/community/view/${id}`);
     }
     const content = parse(blog.content);
-    const subHeader = "By " + blog.username + " At " + new Date(blog.updatedAt).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' });
+    const subHeader = "By " + blog.username + " At " + FORMAT(blog.updatedAt);
     return (
         <Card variant="outlined" sx={{ margin: '16px',boxShadow: '-6px 6px 15px -5px rgba(28,59,120,1)' }} >
             <CardHeader avatar={

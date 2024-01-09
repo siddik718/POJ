@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios';
 import { Box, Container, CssBaseline, Typography } from '@mui/material';
 import AuthContext from '../../Context/AuthContext';
-import { SubmissionTable } from '../../Components/SubmissionTable';
+// import { SubmissionTable } from '../../Components/SubmissionTable';
+import SubmissionTableTwo from '../../Components/SubmissionTableTwo';
 
 export const UserWise = () => {
     const { username } = useContext(AuthContext);
@@ -20,14 +21,14 @@ export const UserWise = () => {
         fetchSubmission();
     }, [username]);
     return (
-        <Container maxWidth='lg'>
+        <Container maxWidth='xl'>
             <CssBaseline />
             <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <Typography variant="h3" color="textPrimary">
                     My Submissions
                 </Typography>
             </Box>
-            {submissions && <SubmissionTable submissions={submissions} />}
+            {submissions && <SubmissionTableTwo submissions={submissions} />}
         </Container>
     )
 }

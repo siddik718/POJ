@@ -22,7 +22,7 @@ export const Submission = () => {
 
   const [loading, setLoding] = useState(false);
   const [result, setRuslt] = useState("");
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(true);
 
   const { username } = useContext(AuthContext);
   const handleSubmit = async () => {
@@ -45,14 +45,14 @@ export const Submission = () => {
     if (state === null || result === "") return;
 
     // check if this problem is already a accepted problem.
-    console.log('problemNo : ',state.problemNO)
-    if(haveProblem(state.problemNO) && getVerdict(state.problemNO) === 'Accepted') {
-      console.log('problemNo inSide: ',state.problemNO)
+    console.log('problemNo : ', state.problemNO)
+    if (haveProblem(state.problemNO) && getVerdict(state.problemNO) === 'Accepted') {
+      console.log('problemNo inSide: ', state.problemNO)
       return;
     }
-    console.log('problemNo outSide: ',state.problemNO)
-    StoreProblem(state.problemNO,result);
-    
+    console.log('problemNo outSide: ', state.problemNO)
+    StoreProblem(state.problemNO, result);
+
     const submitToContest = async () => {
       const api = process.env.REACT_APP_STANDING_API;
       const r = await axios.post(api, { score: result === 'Accepted' ? 1 : -0.01, username, contestID: state.contestID });

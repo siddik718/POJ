@@ -49,7 +49,7 @@ export const userWise = async (req,res) => {
 }
 
 
-import { createSubmission,getSubmission } from "../SubmissionHandler/Rapidapi.js";
+import { createSubmission,getSubmission } from "../helper/Rapidapi.js";
 export const test = async (req,res) => {
     const { language, source_code, username, id } = req.body;
     let langID = 54;

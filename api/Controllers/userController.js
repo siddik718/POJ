@@ -213,3 +213,29 @@ export const sayMyName = async (req, res) => {
     });
   }
 };
+
+
+export const makeAdmin = async(req,res) => {
+  const {username} = req.body;
+  console.log(req.body);
+  try {
+    const updatedUser = await USER.findOneAndUpdate(
+      { username: username },
+      { admin: true },
+      { new: true }
+    );
+    console.log(updatedUser);
+
+    if (updatedUser) {
+      return res.status(200).json(updatedUser);
+    } else {
+      return res.status(404).json({
+        message: 'No User Found'
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Internal Error'
+    });
+  }
+}

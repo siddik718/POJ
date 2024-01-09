@@ -37,3 +37,7 @@ export const GT = (time1,time2) => {
 export const Format = (time) => {
     return dayjs(time).format('hh:mm:ss -- YYYY:MM:DD');
 }
+
+export const FORMAT = (time) => {
+    return dayjs(time).format('L, LT');
+}

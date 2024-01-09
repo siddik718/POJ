@@ -38,6 +38,7 @@ import PageNotFound from './Pages/PageNotFound/PageNotFound';
 import PrivateRoute from './Authoraization/PrivateRoute';
 import PrivateRouteForContest from './Authoraization/PrivateRouteForContest';
 import OldContest from './Pages/Contest/OldContest';
+import { Default2 } from './Pages/User/Default2';
 
 function App() {
   const googleClientID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
@@ -49,22 +50,24 @@ function App() {
           <Routes>
             <Route path='/' element={<Home />} />
 
+            {/* User Private Routes */}
             <Route element={<PrivateRoute />}>
-              <Route path='/me/:id' element={<Default />} />
+              <Route path='/me/:id' element={<Default2 />} />
               <Route path='community/view/:id' element={<Oneblog />} />
               <Route path='/community/update/:id' element={<Updateblog />} />
               <Route path="/community/create-blog" element={<Createblog />} />
               <Route path='/add-problem' element={<Addproblem />} />
               <Route path='/my/blogs' element={<Discussions />} />
               <Route path='/submissions/my/:id' element={<UserWise />} />
-              <Route path='message/:id' element={<Messenger />} />
               <Route path='/contest/:id' element={<ContestDetails />} />
+              <Route path='/add-contest' element={<AddContest />} />
             </Route>
 
+            {/* Contest Running Private Routes */}
             <Route element={<PrivateRouteForContest />}>
               <Route path='/submissions' element={<AllSubmission />} />
+              <Route path='message/:id' element={<Messenger />} />
             </Route>
-
 
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<Signup />} />
@@ -79,9 +82,7 @@ function App() {
 
             {/* Contest Routes */}
             <Route path='/contest' element={<ContestHome />} />
-            <Route path='/add-contest' element={<AddContest />} />
             <Route path='/standing/:id' element={<OldContest />} />
-
 
             <Route path='/*' element={<PageNotFound />} />
 
