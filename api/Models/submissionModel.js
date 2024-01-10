@@ -32,7 +32,11 @@ const submissionSchema = new Schema({
     sourceCode: {
         type: String,
         required: true
-    }
+    },
+    problemCategory: {
+        type: String,
+        required: true,
+    },
 },{timestamps: true});
 const SUBMISSIONS = model('SUBMISSIONS',submissionSchema);
 export default SUBMISSIONS;

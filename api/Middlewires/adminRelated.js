@@ -6,8 +6,10 @@ export const isAdmin = async(req,res,next) => {
     try {
         // find if the user is admin...
         const userExist = await USER.findById(id);
+        console.log(userExist);
         if(userExist && userExist.admin === true) {
             next();
+            console.log(userExist);
         }else {
             return res.status(401).json({message: 'You are not Autherized'});
         }

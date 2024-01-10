@@ -83,7 +83,8 @@ export const test = async (req,res) => {
           status:responseTwo.status.description,
           language: language,
           difficulty: problem.difficulty,
-          sourceCode:source_code
+          sourceCode:source_code,
+          problemCategory: problem.selectedTags
         });
   
         await submission.save();

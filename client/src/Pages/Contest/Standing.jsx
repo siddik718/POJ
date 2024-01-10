@@ -1,5 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, styled } from '@mui/material'
+
+const CustomTableCell = styled(TableCell)({
+  color: '#333',
+  border: '1px solid #dabbbb',
+  opacity: '0.9',
+  textAlign: 'center',
+  width: '33%',
+})
+const CustomTableHead = styled(TableHead)({
+  backgroundColor: '#e1d6d6',
+})
 
 const Standing = ({ contestID }) => {
   const [standings, setStandings] = useState([]);
@@ -18,27 +30,30 @@ const Standing = ({ contestID }) => {
     fetchStanding();
   }, [contestID]);
   return (
-    <div className='standing-table'>
-      <h2>Standings</h2>
-      <table >
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Username</th>
-            <th>Total Score</th>
-          </tr>
-        </thead>
-        <tbody>
-          {standings.length > 0 && standings.map((standing, index) => (
-            <tr key={index}>
-              <td>{index + 1}</td>
-              <td>{standing.username}</td>
-              <td>{Math.max(standing.score,0)}</td>
-            </tr>
+    <TableContainer>
+      <Table>
+        <CustomTableHead>
+          <TableRow>
+            <CustomTableCell>RANK</CustomTableCell>
+            <CustomTableCell>USERNAME</CustomTableCell>
+            <CustomTableCell>PENALTY</CustomTableCell>
+          </TableRow>
+        </CustomTableHead>
+        <TableBody>
+          {standings.length > 0 && standings.map((standing,index)=>(
+            <TableRow key={standing._id} hover sx={{
+              backgroundColor: index === 0 && '#a4a4f2',
+            }}>
+              <CustomTableCell>{index + 1}</CustomTableCell>
+              <CustomTableCell>{standing.username}</CustomTableCell>
+              <CustomTableCell sx={{
+                color: standing.score >= 0 ? 'blue' : 'red'
+              }}>{standing.score}</CustomTableCell>
+            </TableRow>
           ))}
-        </tbody>
-      </table>
-    </div>
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 };
 export default Standing;

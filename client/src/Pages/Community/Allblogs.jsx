@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { Box, Container, CssBaseline, Grid, Typography, Tooltip, Pagination, Fab } from '@mui/material';
+import { Box, Container, CssBaseline,Pagination} from '@mui/material';
 import BlogCard from '../../Components/BlogCard';
-import AddIcon from '@mui/icons-material/Add';
-import { useNavigate } from 'react-router-dom';
 import { LoadingPage } from '../../Components/LoadingPage';
+import TopBar from '../../Components/TopBar';
 
 export const Allblogs = () => {
     const [loading, setLoading] = useState(true);
@@ -22,10 +21,6 @@ export const Allblogs = () => {
         }
         fetchBlogs();
     }, []);
-    const nevigate = useNavigate();
-    const handleAddButton = () => {
-        nevigate('/community/create-blog');
-    }
     // code for pageination.
     const [page, setPage] = useState(1); // current page.
     const pageSize = 3;
@@ -40,22 +35,10 @@ export const Allblogs = () => {
         <Container>
             <CssBaseline />
             <Box>
-                <Grid container justifyContent="space-between" sx={{
-                    padding: '10px 10px'
-                }}>
-                    <Grid item>
-                        <Typography variant="h3" color="secondary">
-                            Discussions
-                        </Typography>
-                    </Grid>
-                    <Grid item >
-                        <Tooltip title="Add A New Discussion" arrow>
-                            <Fab color="primary" aria-label="add" onClick={handleAddButton}>
-                                <AddIcon />
-                            </Fab>
-                        </Tooltip>
-                    </Grid>
-                </Grid>
+                <TopBar
+                    navigationLocation={"/community/create-blog"} headingContent={"POJ Discussions"}
+                    toolTipTitle={"Add A New Discussion"}
+                />
 
                 {blogsOnPage.map((blog) => (
                     <Box key={blog._id} >

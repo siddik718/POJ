@@ -4,7 +4,7 @@ import { Box, Container, CssBaseline, Typography, TextField, Button, Autocomplet
 import TextEditor from '../../Components/TextEditor';
 import AuthContext from '../../Context/AuthContext';
 
-const tags = ['binary Search', 'bitmask', 'brute force', 'combinatorics', 'number theory', "greedy", 'dfs and bfs', 'divide and conquer', 'dynamic programming', 'geometry'];
+const tags = ['Introductory Problems', 'Sorting and Searching', 'Dynamic Programming', 'Graph Algorithms', "Mathematics", 'Advanced Techniques'];
 
 export const Addproblem = () => {
     const [data, setdata] = useState({
@@ -13,7 +13,8 @@ export const Addproblem = () => {
         sampleOutput: "",
         input: "",
         output: "",
-        difficulty: ""
+        difficulty: "",
+        selectedTags: tags[0],
     });
     const [statement, setStatement] = useState('');
     const handleStatementChange = (value) => {
@@ -29,14 +30,13 @@ export const Addproblem = () => {
     const handleChangeOnConstraint = (e) => {
         setConstraints({ ...constraint, [e.target.name]: Math.max(e.target.value, 0) });
     }
-    const [selectedTags, setSelectedTags] = useState([tags[0]]);
-    const handleTagsChange = (event, newValue) => {
-        setSelectedTags(newValue);
-    };
+    const handleTagChange = (event, value) => {
+        setdata({ ...data, selectedTags: value });
+    }
     const { username } = useContext(AuthContext);
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const { title, sampleInput, sampleOutput, input, output, difficulty } = data;
+        const { title, sampleInput, sampleOutput, input, output, difficulty,selectedTags } = data;
         const { timeLimit, memoryLimit } = constraint;
 
         // console.log('Username ' + username); // 0
@@ -164,17 +164,17 @@ export const Addproblem = () => {
                 <Autocomplete
                     fullWidth
                     margin='auto'
-                    multiple
+                    // multiple
                     id="tags-standard"
                     options={tags}
-                    value={selectedTags}
-                    onChange={handleTagsChange}
+                    value={data.selectedTags}
+                    onChange={handleTagChange}
                     defaultValue={[tags[0]]}
                     renderInput={(params) => (
                         <TextField
                             {...params}
                             variant="standard"
-                            label="Problem Tags"
+                            label="Problem Category"
                             placeholder="Enter tags"
                         />
                     )}

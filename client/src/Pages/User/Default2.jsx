@@ -118,6 +118,7 @@ export const Default2 = () => {
             try {
                 const response = await axios.get(process.env.REACT_APP_USER_API + 'me/' + currentUserProfile);
                 setStats(response.data);
+                console.log(response.data);
             } catch (err) {
                 console.log(err);
             }
@@ -156,17 +157,23 @@ export const Default2 = () => {
                 <ProfileStats>
                     <ProfileStatsUpper>
                         <Typography>
-                            Discussion Points : 5
+                            Discussion Points : {stats.blogs}
                         </Typography>
                         <Typography>
-                            Problem Tried : 980
+                            Problem Tried : {stats.submissions}
                         </Typography>
                         <Typography>
-                            Acceptence Ratio : 60%
+                            Acceptence Ratio :  {((stats.AC / stats.submissions) * 100).toFixed(2)}%
                         </Typography>
                     </ProfileStatsUpper>
                     <ProfileStatsLower>
-                        <Stats dp={72} dfs={32} bs={37} nt={75} basic={35} />
+                        <Stats 
+                        dp={stats.DP} 
+                        ms={stats.MS} 
+                        ip={stats.IP} 
+                        ss={stats.SS} 
+                        at={stats.AT} 
+                        />
                     </ProfileStatsLower>
                 </ProfileStats>
             </LeftBox>

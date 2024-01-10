@@ -5,7 +5,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useNavigate } from 'react-router-dom';
 
 import { GoogleLogin } from '@react-oauth/google';
-import { StoreData, getData } from '../Authoraization/Auth';
+import { StoreData } from '../Authoraization/Auth';
 import AuthContext from '../Context/AuthContext';
 
 export const Signup = () => {
@@ -40,15 +40,16 @@ export const Signup = () => {
             setError('Invalid Data,Please Try Again.')
         }
     }
-    const { setUsername, setEmail } = useContext(AuthContext);
+    const { setUsername, setEmail, setCurrentUserId } = useContext(AuthContext);
     const handleGoogleSuccess = async (credentialResponse)=> {
         const api = process.env.REACT_APP_USER_API + "googleAuth";
         try {
             const response = await axios.post(api,{credentialResponse});
             if (response) {
                 StoreData(response);
-                setUsername(getData().data.username);
-                setEmail(getData().data.email);
+                setUsername(response.data.username);
+                setEmail(response.data.email);
+                setCurrentUserId(response.data.id)
                 navigate('/');
             } else {
                 setError('No User Found,Please Try Again.')

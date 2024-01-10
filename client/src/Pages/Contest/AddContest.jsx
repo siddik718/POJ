@@ -9,6 +9,7 @@ import SelectProblem from '../../Components/SelectProblem'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../Context/AuthContext'
+
 export const AddContest = () => {
     const [startTime, setStartTime] = useState(dayjs());
     const [endTime, setEndTime] = useState(dayjs());
@@ -22,7 +23,7 @@ export const AddContest = () => {
             try {
                 const api = process.env.REACT_APP_PROBLEM_API;
                 const res = await axios.get(api);
-                setProblems(res.data);
+                setProblems(res.data.problems);
             } catch (err) {
                 console.log(err)
             }
@@ -35,7 +36,7 @@ export const AddContest = () => {
     };
 
     const {currentUserId} = useContext(AuthContext);
-
+    // console.log(currentUserId);
     const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -52,6 +53,7 @@ export const AddContest = () => {
             navigate(-1);
         } catch (err) {
             console.log(err);
+            alert(err.response.data.message);
         }
     }
     return (

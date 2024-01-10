@@ -82,7 +82,7 @@ const SubmissionTableTwo = ({ submissions }) => {
                     </CustomTableHead>
                     <TableBody>
                         {submissionOnThisPage.length > 0 && submissionOnThisPage.map((sub) => (
-                            <TableRow key={sub._id} hover="true">
+                            <TableRow key={sub._id} hover>
                                 <CustomTableCell>{sub.submissionID}</CustomTableCell>
                                 <CustomTableCell colSpan={2}>{sub.title}</CustomTableCell>
                                 <CustomTableCell>{sub.difficulty}</CustomTableCell>

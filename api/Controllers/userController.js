@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 import { jwtDecode } from "jwt-decode";
 
 export const login = async (req, res) => {
+  console.log('Login : ',req.body);
   const { email, password } = req.body;
   try {
     // check if user exist.
@@ -26,6 +27,7 @@ export const login = async (req, res) => {
   }
 };
 export const register = async (req, res) => {
+  console.log('Rigester: ',req.body);
   const { username, email, password } = req.body;
   try {
     // check if user already exist.
@@ -115,6 +117,15 @@ export const statistics = async (req, res) => {
       });
     const blogs = await BLOG.find({ username });
     const submissions = await SUBMISSIONS.find({ username });
+
+
+    const DP = submissions.filter((problem)=> problem.problemCategory === "Dynamic Programming");
+    const AT = submissions.filter((problem)=> problem.problemCategory === "Advanced Techniques");
+    const MS = submissions.filter((problem)=> problem.problemCategory === "Mathematics");
+    const SS = submissions.filter((problem)=> problem.problemCategory === "Sorting and Searching");
+    const IP = submissions.filter((problem)=> problem.problemCategory === "Introductory Problems");
+
+
     // find status statistics
     const AC = submissions.filter((submission) => {
       return submission.status === "Accepted";
@@ -180,6 +191,8 @@ export const statistics = async (req, res) => {
       MEDIUM: MEDIUM.length,
       HARD: HARD.length,
       ID: user._id,
+      submissionsArray: submissions,
+      DP:DP.length,AT:AT.length,SS:SS.length,MS:MS.length,IP:IP.length
     });
   } catch (err) {
     return res.status(400).json({

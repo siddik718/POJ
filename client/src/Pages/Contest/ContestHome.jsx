@@ -1,44 +1,24 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Box, Container, CssBaseline, Fab, Tooltip, Typography } from '@mui/material'
-import AddIcon from '@mui/icons-material/Add';
+import { Box, Container, CssBaseline } from '@mui/material'
 import { styled } from '@mui/system';
-
-import { Allcontest } from './Allcontest';
-
-const FirstBox = styled(Box)({
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  m: '5px'
-})
+import { AllcontestTwo } from './AllContestTwo';
+import TopBar from '../../Components/TopBar';
 const SecondBox = styled(Box)({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
   m: '5px'
 })
-
 export const ContestHome = () => {
-  const navigate = useNavigate();
-  const handleAddButton = () => {
-      navigate('/add-contest');
-  }
-
   return (
     <Container maxWidth="xl">
       <CssBaseline />
-      <FirstBox>
-        <Typography component="h2" variant='h5'>
-          POJ Contests </Typography>
-        <Tooltip title="Add A New Contest" arrow>
-          <Fab color="primary" aria-label="add" onClick={handleAddButton}>
-            <AddIcon />
-          </Fab>
-        </Tooltip>
-      </FirstBox>
+      <TopBar
+        navigationLocation={"/add-contest"} headingContent={"POJ Contests"}
+        toolTipTitle={"Add A New Contest"}
+      />
       <SecondBox>
-        <Allcontest />
+        <AllcontestTwo />
       </SecondBox>
     </Container>
   )

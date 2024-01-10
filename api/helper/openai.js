@@ -1,7 +1,9 @@
 import OpenAI from "openai";
-
-const client = new OpenAI({ apiKey: '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' });
-
+import { config } from 'dotenv';
+config();
+const apiKey = process.env.OPENAI_KEY;
+// console.log('ApiKey : ',apiKey);
+const client = new OpenAI({ apiKey });
 const systemMessageToSummerizeCode = {
   role: "system",
   content: "You are an expert in programming.So,you will be given a code.Your first task will be to read the whole code first and find if there are any errors, like a syntax error, an array out of bounds, or a division by zero.If there is any error, then specify where the error is and what the error is.Otherwise,Remove every unnecessary part of the code to make it more readable.You can take your time to make a clean code. Also, if any specific algorithm is used, then say something about it and give some resources on that algorithm. If no specific algorithm is used, then say nothing."

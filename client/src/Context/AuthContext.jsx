@@ -20,6 +20,7 @@ export const AuthProvider = ({ children }) => {
             setUsername, 
             setEmail,
             currentUserId,
+            setCurrentUserId,
         }}>
             {children}
         </AuthContext.Provider>

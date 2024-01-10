@@ -1,7 +1,25 @@
 import React from 'react'
-import './Contest.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { Box, Container, CssBaseline, Typography, styled } from '@mui/material'
+const TopBox = styled(Box)({
+  padding: '5px',
+  margin: '5px',
+})
+const ProblemBox = styled(Box)({
+  margin: '5px',
+  padding: "10px",
+  borderRadius: '12px',
+  '&:hover':{
+    backgroundColor: '#88abf2',
+  },
+})
+const ProblemTypography = styled(Typography)({
+  fontSize: '1.025rem',
+  color: '#303133',
+  cursor:'pointer',
+})
+
 const Dashboard = ({ problems,contestID }) => {
   const navigate = useNavigate();
   const handleClick = async (title,index)=>{
@@ -14,19 +32,24 @@ const Dashboard = ({ problems,contestID }) => {
         problemNO: index,
         contestID,
       }
-      navigate(`/problems/${res.data._id}`,{ state: data});
+      navigate(`/contest-problems/${res.data._id}`,{ state: data});
     }catch(err) {
       console.log(err);
     }
   }
   return (
-    <div className='problems'>
-      {problems && problems.length > 0 && problems.map((problem, index) => (
-        <div key={index} className='problem' onClick={ () => handleClick(problem,index) }>
-          Problem #{index + 1} : {problem}
-        </div>
-      ))}
-    </div>
+    <Container maxWidth='xl'>
+      <CssBaseline />
+      <TopBox>
+        {problems && problems.length > 0 && problems.map((problem,index)=>(
+          <ProblemBox key={index}>
+            <ProblemTypography onClick={()=>handleClick(problem,index)}>
+              Problem #{index + 1} : {problem}
+            </ProblemTypography>
+          </ProblemBox>
+        ))}
+      </TopBox>
+    </Container>
   )
 }
 

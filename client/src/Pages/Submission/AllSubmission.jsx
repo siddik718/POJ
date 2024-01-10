@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Box, Container, CssBaseline, Typography } from '@mui/material';
-import { SubmissionTable } from '../../Components/SubmissionTable';
+import SubmissionTableTwo from '../../Components/SubmissionTableTwo';
 export const AllSubmission = () => {
     const [submissions, setSubmissions] = useState([]);
     useEffect(() => {
@@ -24,7 +24,7 @@ export const AllSubmission = () => {
                     Recent Submissions
                 </Typography>
             </Box>
-            {submissions && <SubmissionTable submissions={submissions} />}
+            {submissions && <SubmissionTableTwo submissions={submissions} />}
         </Container>
     )
 }

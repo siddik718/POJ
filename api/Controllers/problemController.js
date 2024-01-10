@@ -2,8 +2,15 @@ import PROBLEMS from "../Models/problemModel.js";
 
 export const allProblem = async (req, res) => {
   try {
-    const problems = await PROBLEMS.find().sort({ createdAt: -1 });
-    return res.status(200).json(problems);
+    const problems = await PROBLEMS.find();
+    const DP = problems.filter((problem)=> problem.selectedTags === "Dynamic Programming");
+    const AT = problems.filter((problem)=> problem.selectedTags === "Advanced Techniques");
+    const MS = problems.filter((problem)=> problem.selectedTags === "Mathematics");
+    const SS = problems.filter((problem)=> problem.selectedTags === "Sorting and Searching");
+    const IP = problems.filter((problem)=> problem.selectedTags === "Introductory Problems");
+    return res.status(200).json({
+      problems,DP,AT,MS,SS,IP
+    });
   } catch (err) {
     return res.status(500).json({
       message: "Internal Error",
@@ -42,17 +49,17 @@ export const addProblem = async (req, res) => {
     selectedTags,
     difficulty,
   } = req.body;
-  console.log("Username " + username); // 0
-  console.log("Title" + title); // 1
-  console.log("statement" + statement); // 2
-  console.log("sampleInput" + sampleInput); // 3
-  console.log("sampleOutput" + sampleOutput); // 4
-  console.log("input" + input); // 5
-  console.log("output" + output); // 6
-  console.log("timeLimit" + timeLimit); // 7
-  console.log("memoryLimit" + memoryLimit); // 8
-  console.log("tags" + selectedTags); // 9
-  console.log("difficulty" + difficulty); // 10
+  // console.log("Username " + username); // 0
+  // console.log("Title" + title); // 1
+  // console.log("statement" + statement); // 2
+  // console.log("sampleInput" + sampleInput); // 3
+  // console.log("sampleOutput" + sampleOutput); // 4
+  // console.log("input" + input); // 5
+  // console.log("output" + output); // 6
+  // console.log("timeLimit" + timeLimit); // 7
+  // console.log("memoryLimit" + memoryLimit); // 8
+  // console.log("tags" + selectedTags); // 9
+  // console.log("difficulty" + difficulty); // 10
   try {
     // check if same title problem exist.
     const alreadyHave = await PROBLEMS.findOne({ title });

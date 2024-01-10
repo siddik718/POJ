@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { StoreData, getData } from '../Authoraization/Auth';
+import { StoreData } from '../Authoraization/Auth';
 import { Avatar, Box, Button, Container, CssBaseline, Grid, TextField, Typography } from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import AuthContext from '../Context/AuthContext';
@@ -15,7 +15,7 @@ export const Login = () => {
     const handleChange = (e) => {
         setdata({ ...data, [e.target.name]: e.target.value });
     }
-    const { setUsername, setEmail } = useContext(AuthContext);
+    const { setUsername, setEmail,setCurrentUserId } = useContext(AuthContext);
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const handleSubmit = async (e) => {
@@ -24,10 +24,11 @@ export const Login = () => {
             const { email, password } = data;
             const api = process.env.REACT_APP_USER_API;
             const response = await axios.post(api + 'login', { email, password });
-            if (response) {
+            if (response.status === 200) {
                 StoreData(response);
-                setUsername(getData().data.username);
-                setEmail(getData().data.email);
+                setUsername(response.data.username);
+                setEmail(response.data.email);
+                setCurrentUserId(response.data.id);
                 navigate('/');
             } else {
                 setError('No User Found,Please Try Again.')
@@ -40,10 +41,11 @@ export const Login = () => {
         const api = process.env.REACT_APP_USER_API + "googleAuth";
         try {
             const response = await axios.post(api, { credentialResponse });
-            if (response) {
+            if (response.status === 200) {
                 StoreData(response);
-                setUsername(getData().data.username);
-                setEmail(getData().data.email);
+                setUsername(response.data.username);
+                setEmail(response.data.email);
+                setCurrentUserId(response.data.id);
                 navigate('/');
             } else {
                 setError('No User Found,Please Try Again.')

@@ -12,14 +12,10 @@ import {
   Button,
   IconButton,
   Tooltip,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Dialog,
 } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
-export const Oneproblem = () => {
+export const ContestProblems = () => {
   const { id } = useParams();
   const { state } = useLocation();
   const [data, setData] = useState('');
@@ -35,7 +31,6 @@ export const Oneproblem = () => {
         console.log(error.data);
       }
     };
-
     fetchData();
   }, [id]);
 
@@ -48,53 +43,8 @@ export const Oneproblem = () => {
   const handleSubmit = () => {
     navigate(`/problems/submission/${id}`, { state: state });
   }
-  const [openDialog, setOpenDialog] = useState(false);
-  const [answer,setAnswer] = useState("");
-  const handleSummerize = async () => {
-    setOpenDialog(true);
-    setAnswer("");
-    try {
-      const api = process.env.REACT_APP_OPEN_API + "summerizeStatement";
-
-      const response = await fetch(api, {
-        method: "post",
-        headers: {
-          Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userPrompt: statement }),
-      });
-      if (!response.ok || !response.body) {
-        throw new Error(response.statusText);
-      }
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder();
-      while (true) {
-        const { value, done } = await reader.read();
-        if (done) {
-          break;
-        }
-        const decodedChunk = decoder.decode(value, { stream: true });
-        // console.log(decodedChunk)
-        setAnswer((prev)=>prev+decodedChunk);
-      }
-      // const response = await axios.post(api,{statement});
-      // console.log(response.data);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-  const handleClose = () => {
-    setOpenDialog(false);
-  };
-  const jsxContent = answer.split('\n').map((line, index) => (
-    <React.Fragment key={index}>
-      {line}
-      <br />
-    </React.Fragment>
-  ));
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="xl">
       <CssBaseline />
       <Box
         sx={{
@@ -153,33 +103,8 @@ export const Oneproblem = () => {
             </Paper>
           </Grid>
         </Grid>
-        <Box sx={{
-          display:'flex',
-          justifyContent:'space-between',
-          alignItems:'center',
-          width: '100%',
-          padding: '0 20%',
-        }}>
         <Button variant="contained" color="primary" onClick={handleSubmit}>Submit</Button>
-        <Typography variant="body2" color="initial"> Or </Typography>
-        <Button variant="contained" color="primary" onClick={handleSummerize}> Get Help From AI </Button>  
         </Box>
-      </Box>
-
-      
-
-      <Dialog open={openDialog} onClose={handleClose} maxWidth="md" fullWidth>
-        <DialogTitle>Summery</DialogTitle>
-        <DialogContent>
-          <Box sx={{ display: 'flex', justifyContent: 'end', alignItems: 'center',minWidth:'400px' }}>
-              {jsxContent}
-          </Box>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="warning">Close</Button>
-        </DialogActions>
-      </Dialog>
-
     </Container>
   );
 };

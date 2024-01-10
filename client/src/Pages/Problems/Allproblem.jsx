@@ -5,14 +5,13 @@ import { Box, Button, Card, CardHeader, Container, CssBaseline, Fab, Pagination,
 import AddIcon from '@mui/icons-material/Add';
 import { LoadingPage } from '../../Components/LoadingPage';
 
-
 export const Allproblem = () => {
   const [loading, setLoading] = useState(true);
   const [problems, setProblems] = useState([]);
   useEffect(() => {
     const fetchProblems = async () => {
       const response = await axios.get(process.env.REACT_APP_PROBLEM_API);
-      setProblems(response.data);
+      setProblems(response.data.problems);
       setLoading(false);
       console.log(response.data);
     }
@@ -25,11 +24,9 @@ export const Allproblem = () => {
   const handleAddButton = () => {
     navigate('/add-problem');
   }
-
-
   // code for pagination .. 
   const [page, setPage] = useState(1); // current page.
-  const pageSize = 3;
+  const pageSize = 50;
   const totalPages = Math.ceil(problems.length / pageSize);
   // start index.
   const startIndex = (page - 1) * pageSize;

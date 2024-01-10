@@ -35,7 +35,7 @@ const problemScema = new Schema({
         required: true
     },
     selectedTags: {
-        type: [String],
+        type: String,
         required: true
     },
     difficulty: {

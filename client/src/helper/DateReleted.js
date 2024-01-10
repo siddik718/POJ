@@ -33,11 +33,33 @@ export const GTE = (time1,time2) => {
 export const GT = (time1,time2) => {
     return dayjs(time1).isAfter(dayjs(time2));
 }
-
 export const Format = (time) => {
     return dayjs(time).format('hh:mm:ss -- YYYY:MM:DD');
 }
-
 export const FORMAT = (time) => {
     return dayjs(time).format('L, LT');
+}
+
+export const Duration = (date1,date2)=> {
+    const duration = dayjs.duration(timeDiff(date1,date2),'seconds');
+    const data = [];
+    if(duration.days()) {
+        data.push(`${duration.days()} days`)
+        if(duration.hours()) {
+            data.push(`:${duration.hours()} hours`)
+            if(duration.minutes()) {
+                data.push(`:${duration.minutes()} minutes`)
+            }
+        }else if(duration.minutes()) {
+            data.push(`:${duration.minutes()} minutes`)
+        }
+    }else if(duration.hours()) {
+        data.push(`${duration.hours()} hours`)
+        if(duration.minutes()) {
+            data.push(`:${duration.minutes()} minutes`)
+        }
+    }else if(duration.minutes()) {
+        data.push(`${duration.minutes()} minutes`)
+    }
+    return data;
 }
