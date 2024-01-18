@@ -15,7 +15,7 @@ const StyledNavLink = styled(NavLink)`
     border-radius: 7px;
     transition: background-color 0.3s ease;
     &:hover {
-      background-color: #215db0;
+      background-color: #000;
     }
   }
 `;
@@ -25,6 +25,7 @@ const StyledNavLinkTwo = styled(NavLink)`
     margin: 10px;
     text-decoration: none;
     padding: 15px;
+    color:#000;
     transition: background-color 0.3s ease;
     &:hover {
       background-color: #d7e3f3;
@@ -52,15 +53,16 @@ const TopTypography = styled(Typography)({
   padding: '5px',
   fontSize: '1.5rem',
   fontWeight: '600',
-  color: '#2c2c9e',
+  color: '#000',
+  letterSpacing:'5px',
 })
 const BottomTypography = styled(Typography)({
   width: '30%',
   // border: '1px solid red',
   padding: '5px',
-  fontSize: '0.95rem',
+  fontSize: '1.25rem',
   textAlign: 'center',
-  color: '#2c2c93',
+  color: '#000',
 })
 const NavLinkBox = styled(Box)({
   margin: '5px',
@@ -94,7 +96,8 @@ const ContibutorBox = styled(Box)({
 const ContibutorTypography = styled(Typography)({
   fontSize: '1.245rem',
   fontWeight: '600',
-  color: '#8181e1',
+  color: '#10692b',
+  letterSpacing: '5px',
 })
 const ContibutorDataBox = styled(Box)({
   // border:'1px solid red',
@@ -107,6 +110,7 @@ const UserNavLink = styled(NavLink)`
   && {
     border-bottom: 1px solid blue;
     text-decoration: none;
+    color: #4a3f3f;
     margin: 3px 0;
     // width: 25%;
     transition: background-color 0.3s ease;
@@ -129,17 +133,17 @@ export const Home = () => {
     fetch();
   }, []);
   const { username } = useContext(AuthContext);
+  const data1 = "Competitive Programming Training Gate";
+  const data2 = "Learn, compete, and improve your competitive programming skills,for free on POJ.";
   return (
     <Container maxWidth='xl' >
       <ContainerBox>
         <TopBox >
           <TopTypography>
-            Competitive Programming Training Gate
+            {data1.toUpperCase()}
           </TopTypography>
           <BottomTypography>
-            Learn, compete, and improve
-            your competitive programming skills,
-            for free on POJ.
+            {data2.toUpperCase()}
           </BottomTypography>
           {username ? (<></>) : (
             <NavLinkBox>
@@ -164,7 +168,7 @@ export const Home = () => {
           <BottomRightBox >
             <ContibutorBox>
               <ContibutorTypography>
-                Top Contributors
+                TOP USERS
               </ContibutorTypography>
             </ContibutorBox>
             <ContibutorDataBox>

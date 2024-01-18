@@ -98,8 +98,10 @@ const Message = () => {
 
             <div className="chat-messages">
                 {messages.map((message, index) => (
-                    <div key={index} >
-                        <strong>{message.sender === currentUserId ? username : receivername}:</strong> {message.message}
+                    <div key={index}>
+                        <strong 
+                        className={message.sender === currentUserId ? "sender" : "receiver"}
+                        >{message.sender === currentUserId ? username : receivername}:</strong> {message.message}
                     </div>
                 ))}
             </div>

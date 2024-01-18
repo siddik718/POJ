@@ -6,10 +6,7 @@ body {
   background-color: #f4f4f4;
 }
 .chat-container {
-  min-width: 70%;
-  max-width: 70%;
-  min-height: 50vh;
-  max-height: 60vh;
+  max-width: 400px;
   margin: 50px auto;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -17,7 +14,6 @@ body {
 
 .chat-messages {
   padding: 10px;
-  min-height: 300px;
   max-height: 300px;
   overflow-y: scroll;
 }
@@ -43,4 +39,10 @@ button {
   padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
+}
+.sender {
+  color: #5a47ed;
+}
+.receiver {
+  color: #da5841;
 }
