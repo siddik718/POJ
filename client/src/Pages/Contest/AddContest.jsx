@@ -57,7 +57,7 @@ export const AddContest = () => {
         }
     }
     return (
-        <Container maxWidth={"sm"}>
+        <Container maxWidth={"sm"} sx={{marginTop:'20px'}}>
             <Box >
                 <Typography>
                     Enter Contest Information Here.
