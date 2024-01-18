@@ -60,7 +60,7 @@ export const getSubmission = async (token) => {
 
   try {
     const response = await axios.request(options);
-    // console.log(response.data);
+    // console.log("OUTPUT: ", base64.decode(response.data.stdout));
     return response.data;
   } catch (error) {
     console.error(error);

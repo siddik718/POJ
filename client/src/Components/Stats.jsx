@@ -20,26 +20,26 @@ const Stats = ({ ip, ss, ms, dp, at }) => {
 
     return (
         <TopBox>
-            <Typography variant="body1" color="primary">Problem Solved On:</Typography>
+            <Typography variant="body1" color="primary">PROBLEM TRIED ON:</Typography>
             <InnerBox>
                 <Typography>INTRODUCTORY PROBLEMS</Typography>
-                <Typography>{ip} SOLVED</Typography>
+                <Typography>{ip} TRIED</Typography>
             </InnerBox>
             <InnerBox>
                 <Typography>SORTING SEARCHING</Typography>
-                <Typography>{ss} SOLVED</Typography>
+                <Typography>{ss} TRIED</Typography>
             </InnerBox>
             <InnerBox>
                 <Typography>MATHEMATICS</Typography>
-                <Typography>{ms} SOLVED</Typography>
+                <Typography>{ms} TRIED</Typography>
             </InnerBox>
             <InnerBox>
                 <Typography>DYNAMIC PROGRAMMING</Typography>
-                <Typography>{dp} SOLVED</Typography>
+                <Typography>{dp} TRIED</Typography>
             </InnerBox>
             <InnerBox>
                 <Typography>ADVANCED TECHNIQUES</Typography>
-                <Typography>{at} SOLVED</Typography>
+                <Typography>{at} TRIED</Typography>
             </InnerBox>
         </TopBox>
     )

@@ -51,12 +51,13 @@ export const userWise = async (req,res) => {
 
 import { createSubmission,getSubmission } from "../helper/Rapidapi.js";
 export const test = async (req,res) => {
+    // console.log(req.body);
     const { language, source_code, username, id } = req.body;
     let langID = 54;
     if(language === "PYTHON3"){
-      langID = 71
+      langID = 92;
     }else if(language === "JAVA8") {
-      langID = 62
+      langID = 91;
     }
     try {
       const problem = await PROBLEMS.findById(id);
@@ -68,11 +69,17 @@ export const test = async (req,res) => {
       const input = problem.input;
       const expectedOutput = problem.output;
       const timeLimit = problem.timeLimit;
+
+      // console.log("input : ",input);
+      // console.log("expectedOutput : ",expectedOutput);
+
       const response = await createSubmission(source_code,input,langID,expectedOutput,timeLimit);
+
+      // console.log("response : ",response);
 
       setTimeout(async ()=>{
         const responseTwo = await getSubmission(response.token);
-        // console.log(responseTwo);
+        // console.log("responseTw0 : ", responseTwo);
         // store the result 
         const tot = await SUBMISSION.find();
         const submission = new SUBMISSION({

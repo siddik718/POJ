@@ -133,6 +133,7 @@ export const Default2 = () => {
     const handleSendClick = (ID) => {
         navigate(`/message/${ID}`);
     }
+    const ratio = (stats.submissions !== 0 ? ((stats.AC / stats.submissions) * 100).toFixed(2) : 0);
     return (
         <Container>
             <LeftBox>
@@ -156,7 +157,7 @@ export const Default2 = () => {
                             PROBLEM TRIED : {stats.submissions}
                         </Typography>
                         <Typography>
-                        ACCEPTENCE RATIO :  {((stats.AC / stats.submissions) * 100).toFixed(2)}%
+                        ACCEPTENCE RATIO :  {ratio}%
                         </Typography>
                     </ProfileStatsUpper>
                     <ProfileStatsLower>
