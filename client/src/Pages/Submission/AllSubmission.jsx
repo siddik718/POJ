@@ -20,8 +20,12 @@ export const AllSubmission = () => {
         <Container maxWidth='lg'>
             <CssBaseline />
             <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Typography variant="h4" component="h3" color="textPrimary">
-                    Recent Submissions
+                <Typography color="textPrimary" style={{ 
+                    fontSize:'2rem',
+                    margin: '10px',
+                    letterSpacing: '10px',
+                 }}>
+                    RECENT SUBMISSIONS
                 </Typography>
             </Box>
             {submissions && <SubmissionTableTwo submissions={submissions} />}

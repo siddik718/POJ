@@ -3,14 +3,12 @@ import axios from 'axios'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, styled } from '@mui/material'
 
 const CustomTableCell = styled(TableCell)({
-  color: '#333',
-  border: '1px solid #dabbbb',
-  opacity: '0.9',
+  color: '#000',
   textAlign: 'center',
   width: '33%',
 })
 const CustomTableHead = styled(TableHead)({
-  backgroundColor: '#e1d6d6',
+  backgroundColor: '#feb552',
 })
 
 const Standing = ({ contestID }) => {

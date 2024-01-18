@@ -2,23 +2,21 @@ import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRo
 import React from 'react'
 import { Duration, FORMAT } from '../helper/DateReleted';
 const CustomTableCell = styled(TableCell)({
-    color: '#333',
-    border: '1px solid #dabbbb',
-    opacity: '0.9',
+    color: '#000',
     textAlign: 'center',
     width: '10%',
 });
 const CustomTableHead = styled(TableHead)({
-    backgroundColor: '#e1d6d6',
+    backgroundColor: '#feb552',
 })
 const ContestInfo = ({ text1, text2,contest ,handleClick }) => {
     return (
         <TableContainer sx={{
-            margin:'5px',
+            margin:'10px',
             padding: '5px',
         }}>
-            <Typography variant="h6" component="div" color="mediumslateblue"> 
-                {text1}
+            <Typography variant="h6" component="div" sx={{ color : '#15085f' }}> 
+                {text1.toUpperCase()}
             </Typography>
             <Table>
             <CustomTableHead>

@@ -11,7 +11,7 @@ const ProblemBox = styled(Box)({
   padding: "10px",
   borderRadius: '12px',
   '&:hover':{
-    backgroundColor: '#88abf2',
+    backgroundColor: '#f2f6ff',
   },
 })
 const ProblemTypography = styled(Typography)({

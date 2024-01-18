@@ -15,7 +15,7 @@ const Container = styled(Box)({
 const LeftBox = styled(Box)({
     flex: 4,
     marginRight: '10px',
-    borderRadius: '55px',
+    borderRadius: '35px',
     background: 'linear-gradient(180deg, rgba(236, 243, 250, 0.80) 0.02%, rgba(232, 240, 251, 0.80) 59.38%, rgba(230, 238, 251, 0.80) 99.98%)',
     padding: '30px',
 });
@@ -54,9 +54,10 @@ const SendButton = styled(Button)({
     borderRadius: '51px',
     background: '#8FE2F4',
     color: '#845g45',
+    transition: '0.3s',
     '&:hover': {
-        color:'#000',
-        background:'#ddd',
+        color:'#fff',
+        background:'#199c08',
     }
 })
 const ProfileStats = styled(Box)({
@@ -149,13 +150,13 @@ export const Default2 = () => {
                 <ProfileStats>
                     <ProfileStatsUpper>
                         <Typography>
-                            Discussion Points : {stats.blogs}
+                        DISCUSSION POINTS : {stats.blogs}
                         </Typography>
                         <Typography>
-                            Problem Tried : {stats.submissions}
+                            PROBLEM TRIED : {stats.submissions}
                         </Typography>
                         <Typography>
-                            Acceptence Ratio :  {((stats.AC / stats.submissions) * 100).toFixed(2)}%
+                        ACCEPTENCE RATIO :  {((stats.AC / stats.submissions) * 100).toFixed(2)}%
                         </Typography>
                     </ProfileStatsUpper>
                     <ProfileStatsLower>

@@ -6,7 +6,7 @@ const TopBar = ({ navigationLocation, headingContent, toolTipTitle,isAdmin }) =>
     return (
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', m: '5px' }}>
             <Typography component="h2" variant='h5'>
-                {headingContent} </Typography>
+                {headingContent.toUpperCase()} </Typography>
             {isAdmin && <Tooltip title={toolTipTitle} arrow>
                 <Fab color="primary" aria-label="add" onClick={() => navigate(navigationLocation)}>
                     <AddIcon />

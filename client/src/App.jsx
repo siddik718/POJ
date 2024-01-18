@@ -40,9 +40,20 @@ import ContestDetailsTwo from './Pages/Contest/ContestDetailsTwo';
 import { ContestProblems } from './Pages/Contest/ContestProblems';
 import AllProblemsTwo from './Pages/Problems/AllProblemsTwo';
 
+import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
+
+const theme = createTheme({
+  typography: {
+    fontFamily: 'Lora, serif',
+  },
+});
+
+
 function App() {
   const googleClientID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
   return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
     <AuthProvider>
       <GoogleOAuthProvider clientId={googleClientID}>
         <Navbar />
@@ -92,6 +103,8 @@ function App() {
         </div>
       </GoogleOAuthProvider>
     </AuthProvider>
+    </ThemeProvider>
+
   );
 }
 export default App;

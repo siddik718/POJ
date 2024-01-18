@@ -23,23 +23,23 @@ const Stats = ({ ip, ss, ms, dp, at }) => {
             <Typography variant="body1" color="primary">Problem Solved On:</Typography>
             <InnerBox>
                 <Typography>INTRODUCTORY PROBLEMS</Typography>
-                <Typography>{ip} solved</Typography>
+                <Typography>{ip} SOLVED</Typography>
             </InnerBox>
             <InnerBox>
                 <Typography>SORTING SEARCHING</Typography>
-                <Typography>{ss} solved</Typography>
+                <Typography>{ss} SOLVED</Typography>
             </InnerBox>
             <InnerBox>
                 <Typography>MATHEMATICS</Typography>
-                <Typography>{ms} solved</Typography>
+                <Typography>{ms} SOLVED</Typography>
             </InnerBox>
             <InnerBox>
-                <Typography>Dynamic Programming</Typography>
-                <Typography>{dp} solved</Typography>
+                <Typography>DYNAMIC PROGRAMMING</Typography>
+                <Typography>{dp} SOLVED</Typography>
             </InnerBox>
             <InnerBox>
                 <Typography>ADVANCED TECHNIQUES</Typography>
-                <Typography>{at} solved</Typography>
+                <Typography>{at} SOLVED</Typography>
             </InnerBox>
         </TopBox>
     )

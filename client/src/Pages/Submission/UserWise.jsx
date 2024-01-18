@@ -24,8 +24,12 @@ export const UserWise = () => {
         <Container maxWidth='xl'>
             <CssBaseline />
             <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Typography variant="h3" color="textPrimary">
-                    My Submissions
+                <Typography color="textPrimary" style={{ 
+                    fontSize:'2rem',
+                    margin: '10px',
+                    letterSpacing: '10px',
+                 }}>
+                    MY SUBMISSIONS
                 </Typography>
             </Box>
             {submissions && <SubmissionTableTwo submissions={submissions} />}
