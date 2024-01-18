@@ -40,7 +40,7 @@ export const Signup = () => {
             setError('Invalid Data,Please Try Again.')
         }
     }
-    const { setUsername, setEmail, setCurrentUserId } = useContext(AuthContext);
+    const { setUsername, setEmail, setCurrentUserId,setIsAdmin } = useContext(AuthContext);
     const handleGoogleSuccess = async (credentialResponse)=> {
         const api = process.env.REACT_APP_USER_API + "googleAuth";
         try {
@@ -50,6 +50,7 @@ export const Signup = () => {
                 setUsername(response.data.username);
                 setEmail(response.data.email);
                 setCurrentUserId(response.data.id)
+                setIsAdmin(response.data.isAdmin);
                 navigate('/');
             } else {
                 setError('No User Found,Please Try Again.')

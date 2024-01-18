@@ -4,7 +4,6 @@ import AuthContext from '../../Context/AuthContext';
 import axios from 'axios';
 import { BarChart, DoughnutChart, PieChart } from '../../Components/Charts';
 import { Box, Button, Typography, styled } from '@mui/material';
-import profile from '../../assests/default.jpg';
 import { useNavigate, useParams } from 'react-router-dom'
 import Stats from '../../Components/Stats';
 const Container = styled(Box)({
@@ -24,14 +23,8 @@ const ProfileInfo = styled(Box)({
     width: '100%',
     height: '25%',
     display: 'flex',
-});
-const ProfileImage = styled(Box)({
-    flex: '4',
-    margin: '2px',
-    borderRadius: '20px',
-    background: `url(${profile}), lightgray 50% / cover no-repeat`,
-    opacity: 0.8,
-    backgroundSize: 'cover',
+    justifyContent:'center',
+    alignItems:'center',
 });
 const ProfileInfoDetails = styled(Box)({
     flex: '8',
@@ -143,7 +136,6 @@ export const Default2 = () => {
         <Container>
             <LeftBox>
                 <ProfileInfo>
-                    <ProfileImage />
                     <ProfileInfoDetails >
                         <UserName>{currentUserProfile}</UserName>
                         <SendButtonBox>

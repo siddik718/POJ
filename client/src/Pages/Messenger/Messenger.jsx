@@ -11,21 +11,21 @@ const Message = () => {
     const { username, currentUserId } = useContext(AuthContext);
     const user = username;
     const receiver = useParams().id;
-    const [receivername,setReceivername] = useState('');
-    const [error,setError] = useState(false);
+    const [receivername, setReceivername] = useState('');
+    const [error, setError] = useState(false);
     // get receiver name.
-    useEffect(()=>{
-        const receiverName = async()=> {
+    useEffect(() => {
+        const receiverName = async () => {
             try {
-                const api = process.env.REACT_APP_USER_API + "sayMyName/"+ receiver;
+                const api = process.env.REACT_APP_USER_API + "sayMyName/" + receiver;
                 const res = await axios.get(api);
                 setReceivername(res.data.users.username);
-            }catch(err) {
+            } catch (err) {
                 setError(true)
             }
         }
         receiverName();
-    },[receiver])
+    }, [receiver])
 
     const [messages, setMessages] = useState([]);
     const [inputMessage, setInputMessage] = useState('');
@@ -95,13 +95,15 @@ const Message = () => {
     return (
         <div className="chat-container">
             {error && <Alert severity="warning">Please Try Again!</Alert>}
+
             <div className="chat-messages">
                 {messages.map((message, index) => (
-                    <div key={index}>
-                        <strong>{message.sender === currentUserId ? username : receivername }:</strong> {message.message}
+                    <div key={index} >
+                        <strong>{message.sender === currentUserId ? username : receivername}:</strong> {message.message}
                     </div>
                 ))}
             </div>
+
             <div className="chat-input">
                 <input
                     type="text"

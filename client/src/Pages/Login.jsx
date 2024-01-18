@@ -15,7 +15,7 @@ export const Login = () => {
     const handleChange = (e) => {
         setdata({ ...data, [e.target.name]: e.target.value });
     }
-    const { setUsername, setEmail,setCurrentUserId } = useContext(AuthContext);
+    const { setUsername, setEmail,setCurrentUserId,setIsAdmin } = useContext(AuthContext);
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const handleSubmit = async (e) => {
@@ -29,6 +29,7 @@ export const Login = () => {
                 setUsername(response.data.username);
                 setEmail(response.data.email);
                 setCurrentUserId(response.data.id);
+                setIsAdmin(response.data.isAdmin);
                 navigate('/');
             } else {
                 setError('No User Found,Please Try Again.')
@@ -46,6 +47,7 @@ export const Login = () => {
                 setUsername(response.data.username);
                 setEmail(response.data.email);
                 setCurrentUserId(response.data.id);
+                setIsAdmin(response.data.isAdmin);
                 navigate('/');
             } else {
                 setError('No User Found,Please Try Again.')

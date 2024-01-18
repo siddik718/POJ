@@ -44,7 +44,7 @@ const SubmissionTableTwo = ({ submissions }) => {
                     Accept: "application/json, text/plain, */*",
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ userPrompt: selectedSourceCode }),
+                body: JSON.stringify({ userPrompt: source }),
             });
             if (!response.ok || !response.body) {
                 throw new Error(response.statusText);

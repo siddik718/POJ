@@ -37,7 +37,7 @@ export const Allblogs = () => {
             <Box>
                 <TopBar
                     navigationLocation={"/community/create-blog"} headingContent={"POJ Discussions"}
-                    toolTipTitle={"Add A New Discussion"}
+                    toolTipTitle={"Add A New Discussion"} isAdmin={true}
                 />
 
                 {blogsOnPage.map((blog) => (

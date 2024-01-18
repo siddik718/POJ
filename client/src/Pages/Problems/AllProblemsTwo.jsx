@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Box, Container, CssBaseline, styled } from '@mui/material'
 import axios from 'axios';
 import ProblemsList from '../../Components/ProblemsList';
 import { LoadingPage } from '../../Components/LoadingPage';
 import TopBar from '../../Components/TopBar';
+import AuthContext from '../../Context/AuthContext';
 
 const ContainerBox = styled(Box)({
     // border:'1px solid red',
@@ -32,13 +33,14 @@ const AllProblemsTwo = () => {
         }
         fetchProblems();
       }, []);
+      const { isAdmin } = useContext(AuthContext);
     return (
         <Container maxWidth="md">
             <CssBaseline/>
             <ContainerBox>
                 <TopBar 
                 navigationLocation={"/add-problem"} headingContent={"POJ Problemsets"}
-                toolTipTitle={"Add A New Problem"}
+                toolTipTitle={"Add A New Problem"} isAdmin={isAdmin}
                 />
                 {loading && <LoadingPage />}
                 <ProblemsList category={"introductory Problems"} problems={introductoryProblems} />

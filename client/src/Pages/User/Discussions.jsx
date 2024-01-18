@@ -6,6 +6,11 @@ import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import ModeEditOutlineTwoToneIcon from '@mui/icons-material/ModeEditOutlineTwoTone';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+
+
+
+
+
 export const Discussions = () => {
     const [blogs, setBlogs] = useState([]);
     const { email } = useContext(AuthContext);
@@ -63,16 +68,29 @@ export const Discussions = () => {
                             border: '1px solid #444',
                             height: '10vh',
                             display: 'flex',
-                            justifyContent: 'center',
+                            justifyContent: 'space-between',
                             alignItems: 'center',
-                            borderRadius: '20px'
+                            borderRadius: '20px',
+                            marginBottom: '5px',
+                            transition: 'background-color 0.8s ease',
+                            '&:hover':{
+                                backgroundColor:'#edd7d7',
+                                cursor:'pointer',
+                            },
                         }}>
                             <Tooltip title="Update Discussion" arrow>
                                 <IconButton onClick={() => handleEditButton(blog._id)} color="primary">
-                                    <ModeEditOutlineTwoToneIcon fontSize="medium" />
+                                    <ModeEditOutlineTwoToneIcon fontSize="medium" color="primary" />
                                 </IconButton>
-                            </Tooltip>{blog.title}<Tooltip title="Delete Discussion" arrow><IconButton onClick={() => handleDeleteButton(blog._id)} color="Warning"><DeleteTwoToneIcon fontSize="medium" />
-                            </IconButton></Tooltip></Box></Box>
+                            </Tooltip>
+                            {blog.title}
+                            <Tooltip title="Delete Discussion" arrow>
+                                <IconButton onClick={() => handleDeleteButton(blog._id)} color="Warning">
+                                    <DeleteTwoToneIcon fontSize="medium" color="warning" />
+                                </IconButton>
+                            </Tooltip>
+                        </Box>
+                    </Box>
                 ))}
             </Box>
         </Container>

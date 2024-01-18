@@ -3,18 +3,15 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
-.main{
-  width:100%;
-  height: calc(100vh - 88px);
-  position: relative;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-image: url('./assests/web.jpg');
-  margin-bottom: 20px;
+.main {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 .pointer {
   cursor: pointer;
-  &:hover{
+  &:hover {
     background-color: #ebcef0;
   }
 }

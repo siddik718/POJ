@@ -55,7 +55,7 @@ export const Submission = () => {
 
     const submitToContest = async () => {
       const api = process.env.REACT_APP_STANDING_API;
-      const r = await axios.post(api, { score: result === 'Accepted' ? 1 : 1000000, username, contestID: state.contestID });
+      const r = await axios.post(api, { score: result === 'Accepted' ? 1 : 18000, username, contestID: state.contestID });
       console.log('After Submitted To Contest : ', r);
     }
     submitToContest();

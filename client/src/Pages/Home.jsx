@@ -113,9 +113,7 @@ const UserNavLink = styled(NavLink)`
   }
 `;
 export const Home = () => {
-
   const [users, setUsers] = useState([]);
-
   useEffect(() => {
     const fetch = async () => {
       try {
@@ -166,7 +164,7 @@ export const Home = () => {
           <BottomRightBox >
             <ContibutorBox>
               <ContibutorTypography>
-                Top Users
+                Top Contributors
               </ContibutorTypography>
             </ContibutorBox>
             <ContibutorDataBox>

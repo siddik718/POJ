@@ -15,6 +15,7 @@ export const login = async (req, res) => {
         id: userExist._id,
         username: userExist.username,
         email: userExist.email,
+        isAdmin: userExist.admin,
         token: generateToken(userExist._id),
       });
     } else {
@@ -75,6 +76,7 @@ export const googleController = async (req, res) => {
         id: userExist._id,
         username: userExist.username,
         email: userExist.email,
+        isAdmin: userExist.admin,
         token: generateToken(userExist._id),
       });
     } else {
@@ -93,6 +95,7 @@ export const googleController = async (req, res) => {
         id: response._id,
         username: response.username,
         email: response.email,
+        isAdmin: response.admin,
         token: generateToken(response._id),
       });
     }

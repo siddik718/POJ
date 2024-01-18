@@ -20,7 +20,7 @@ export const AllSubmission = () => {
         <Container maxWidth='lg'>
             <CssBaseline />
             <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Typography variant="h3" color="textPrimary">
+                <Typography variant="h4" component="h3" color="textPrimary">
                     Recent Submissions
                 </Typography>
             </Box>

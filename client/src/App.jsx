@@ -46,7 +46,7 @@ function App() {
     <AuthProvider>
       <GoogleOAuthProvider clientId={googleClientID}>
         <Navbar />
-        <div style={{ minHeight: '88vh', display: 'flex', flexDirection: 'column' }}>
+        <div className='main'>
           <Routes>
             <Route path='/' element={<Home />} />
 
