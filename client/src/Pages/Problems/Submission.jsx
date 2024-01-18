@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import axios from 'axios';
 import { useLocation, useParams } from 'react-router-dom';
-import { Alert, Backdrop, Box, Button, CircularProgress, Collapse, Container, CssBaseline, FormControl, IconButton, InputLabel, MenuItem, Select } from '@mui/material';
+import { Alert, Backdrop, Box, Button, CircularProgress, Collapse, Container, CssBaseline, FormControl, IconButton, InputLabel, MenuItem, Select, Typography } from '@mui/material';
 import AuthContext from '../../Context/AuthContext';
 import CloseIcon from '@mui/icons-material/Close';
 import { StoreProblem, getVerdict, haveProblem } from '../../helper/contestHelper';
@@ -89,6 +89,9 @@ export const Submission = () => {
       <Box sx={{ maxWidth: '80%', margin: '10px', padding: '10px' }}>
         <Box sx={{ maxWidth: '100%', padding: '10px' }}>
           {result && showResult}
+          <Typography variant="body2" color="textSecondary" style={{margin:'10px',fontWeight:700}}>
+                  For Java Your main method should be inside 'public class Main'
+          </Typography>
           <FormControl fullWidth>
             <InputLabel id="Select-Language">Select Language</InputLabel>
             <Select
