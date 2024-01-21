@@ -1,4 +1,4 @@
-import { Box, Button, Container, CssBaseline, Typography } from '@mui/material'
+import { Box, Button, Container, CssBaseline, Dialog, DialogActions, DialogContent, DialogTitle, Typography } from '@mui/material'
 import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -13,6 +13,7 @@ export const Oneblog = () => {
   const [blog, setBlog] = useState({});
   const [comments, setComments] = useState([]);
   const { username } = useContext(AuthContext);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -25,7 +26,7 @@ export const Oneblog = () => {
       }
     }
     fetchData();
-  }, [comments]);
+  }, [id]);
 
   const [content, setContent] = useState('');
   const handleContentChange = (value) => {
@@ -42,6 +43,54 @@ export const Oneblog = () => {
       console.log(err);
     }
   }
+  const [openDialog, setOpenDialog] = useState(false);
+  const [answer,setAnswer] = useState("");
+  const handleSummerizePost = async () => {
+    // console.log('Tipis na');
+    setOpenDialog(true);
+    setAnswer("");
+    try {
+      const api = process.env.REACT_APP_OPEN_API + "summerizeBlog";
+      // console.log("API : ",api)
+      // console.log(blog && "OK");
+      const response = await fetch(api, {
+        method: "post",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userPrompt: blog?.content }),
+      });
+      if (!response.ok || !response.body) {
+        throw new Error(response.statusText);
+      }
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) {
+          break;
+        }
+        const decodedChunk = decoder.decode(value, { stream: true });
+        // console.log(decodedChunk)
+        setAnswer((prev)=>prev+decodedChunk);
+      }
+      // const response = await axios.post(api,{statement});
+      // console.log(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  const handleClose = () => {
+    setOpenDialog(false);
+    setAnswer("");
+  };
+  const jsxContent = answer.split('\n').map((line, index) => (
+    <React.Fragment key={index}>
+      {line}
+      <br />
+    </React.Fragment>
+  ));
   return (
     <Container>
       <CssBaseline />
@@ -57,6 +106,7 @@ export const Oneblog = () => {
         By {blog.username}, Last Modification {new Date(blog.updatedAt).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' })}
       </Typography>
 
+      <Button variant="outlined" color="primary" onClick={handleSummerizePost}>Summerize The Post With AI</Button>
       <Box sx={{
         fontSize: '15px', marginTop: '25px', padding: '2px',
         border: '1.5px solid #ddd', borderRadius: '20px'
@@ -89,6 +139,19 @@ export const Oneblog = () => {
         </Box>
       </Box>
       {comments.length > 0 && <Comments comments={comments} />}
+
+      <Dialog open={openDialog} onClose={handleClose} maxWidth="md" fullWidth>
+        <DialogTitle>Summery</DialogTitle>
+        <DialogContent>
+          <Box sx={{ display: 'flex', justifyContent: 'end', alignItems: 'center',minWidth:'400px' }}>
+              {jsxContent}
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="warning">Close</Button>
+        </DialogActions>
+      </Dialog>
+
     </Container>
   );
 }
