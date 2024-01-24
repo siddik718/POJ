@@ -9,6 +9,7 @@ A web application to practice DSA for programmers with NodeJS, Express, React, M
   - [Table of Contents](#table-of-contents)
   - [Project Overview](#project-overview)
     - [Backend-Repository](#backend-repository)
+    - [Socket-Repository](#socket-repository)
   - [Technologies Used in Front-End](#technologies-used-in-front-end)
   - [Features](#features)
   - [Getting Started](#getting-started)
@@ -22,6 +23,8 @@ A web application to practice DSA for programmers with NodeJS, Express, React, M
 Elevate online experience with this feature-rich web application. Seamlessly login or sign up via Google Auth 2.0 to access a host of capabilities: create, update, and delete blogs; solve programming challenges; and engage in exhilarating programming contests. Uncover the power of refactored code snippets, aided by AI insights for problem comprehension. ChatGPT offers blog summaries and learning resources. ChartJS visualizes profile progress, while real-time messaging fosters community interaction. Unleash the full potential of  online journey with this dynamic and interconnected platform.
 
 ### [Backend-Repository](https://github.com/siddik718/POJ/tree/master/api)
+
+### [Socket-Repository](https://github.com/siddik718/POJ/tree/master/socket)
 
 ## Technologies Used in Front-End
 
