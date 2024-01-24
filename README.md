@@ -21,11 +21,11 @@ Live [POJ](https://poj.netlify.app/)
 
 Elevate online experience with this feature-rich web application. Seamlessly login or sign up via Google Auth 2.0 to access a host of capabilities: create, update, and delete blogs; solve programming challenges; and engage in exhilarating programming contests. Uncover the power of refactored code snippets, aided by AI insights for problem comprehension. ChatGPT offers blog summaries and learning resources. ChartJS visualizes profile progress, while real-time messaging fosters community interaction. Unleash the full potential of  online journey with this dynamic and interconnected platform.
 
-### [Frontend-Repository](https://github.com/siddik718/POJ/tree/master/client)
+#### [Frontend-Repository](https://github.com/siddik718/POJ/tree/master/client)
 
-### [Backend-Repository](https://github.com/siddik718/POJ/tree/master/api)
+#### [Backend-Repository](https://github.com/siddik718/POJ/tree/master/api)
 
-### [Socket-Repository](https://github.com/siddik718/POJ/tree/master/socket)
+#### [Socket-Repository](https://github.com/siddik718/POJ/tree/master/socket)
 
 ## Features
 
