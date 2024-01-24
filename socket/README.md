@@ -1,4 +1,3 @@
-
 # POJ Web Application
 
 A web application to practice DSA for programmers with NodeJS, Express, React, MongoDB and ChatGPT API.
@@ -8,11 +7,10 @@ A web application to practice DSA for programmers with NodeJS, Express, React, M
 - [POJ Web Application](#poj-web-application)
   - [Table of Contents](#table-of-contents)
   - [Project Overview](#project-overview)
-    - [Backend-Repository](#backend-repository)
-  - [Technologies Used in Front-End](#technologies-used-in-front-end)
+    - [Socket-Repository](#socket-repository)
+  - [Back-End Technologies](#back-end-technologies)
   - [Features](#features)
   - [Getting Started](#getting-started)
-  - [Usage](#usage)
   - [Contributing](#contributing)
   - [Developer Documentation](#developer-documentation)
   - [License](#license)
@@ -21,14 +19,11 @@ A web application to practice DSA for programmers with NodeJS, Express, React, M
 
 Elevate online experience with this feature-rich web application. Seamlessly login or sign up via Google Auth 2.0 to access a host of capabilities: create, update, and delete blogs; solve programming challenges; and engage in exhilarating programming contests. Uncover the power of refactored code snippets, aided by AI insights for problem comprehension. ChatGPT offers blog summaries and learning resources. ChartJS visualizes profile progress, while real-time messaging fosters community interaction. Unleash the full potential of  online journey with this dynamic and interconnected platform.
 
-### [Backend-Repository](https://github.com/siddik718/POJ/tree/master/api)
+### [Socket-Repository](https://github.com/siddik718/POJ/tree/master/socket)
 
-## Technologies Used in Front-End
+## Back-End Technologies
 
-- React Js
-- Material UI
-- ChartJS
-- Socket.io-client
+- Socket.io
 
 ## Features
 
@@ -79,19 +74,9 @@ There is a lot interasting feature in the application some of them are mentioned
 To get started with the POJ Web Application, follow these steps:
 
 1. Clone the repository: `git clone https://github.com/siddik718/POJ.git`
-2. Navigate to Client Folder: `cd client`
+2. Navigate to Client Folder: `cd socket`
 3. Install the required dependencies: `npm install`
 4. Run the server: `npm start`
-5. Navigate to <http://localhost:3000/> in your web browser to access the application.
-
-## Usage
-
-If you'd like to contribute to this web application, please follow these steps:
-
-1. Open your web browser and navigate to [(POJ)](https://poj.netlify.app/).
-2. Login by which ever way you like mention above [Authentication](#authentication)
-3. Then You are good to use the application properly.
-4. You will only get refactored code in standing after you click on source code.
 
 ## Contributing
 
