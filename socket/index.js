@@ -1,6 +1,6 @@
 import { Server } from "socket.io";
 const io = new Server({ 
-    cors: "http://localhost:3000",
+    cors: "https://poj.netlify.app",
     methods: ["GET", "POST"]
 });
 let onlineUser = [];
