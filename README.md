@@ -90,8 +90,6 @@ To get started with the POJ Web Application, follow these steps:
 
 ## Usage
 
-If you'd like to contribute to this web application, please follow these steps:
-
 1. Open your web browser and navigate to [poj](https://poj.netlify.app/).
 2. Login by which ever way you like mention above [Authentication](#authentication)
 3. Then You are good to use the application properly.
@@ -108,4 +106,4 @@ If you'd like to contribute to this web application, please follow these steps:
 
 ## License
 
-The Text Sharing Web Application is licensed under the MIT License. See LICENSE.txt for more information.
+The POJ Web Application is licensed under the MIT License. See LICENSE.txt for more information.
