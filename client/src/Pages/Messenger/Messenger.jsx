@@ -5,8 +5,7 @@ import { io } from 'socket.io-client';
 import { useParams } from 'react-router-dom';
 import AuthContext from '../../Context/AuthContext';
 import { useContext, useEffect, useState } from 'react';
-const ENDPOINT = "http://localhost:8000";
-
+const ENDPOINT = process.env.REACT_APP_SOCKET_API;
 const Message = () => {
     const { username, currentUserId } = useContext(AuthContext);
     const user = username;
