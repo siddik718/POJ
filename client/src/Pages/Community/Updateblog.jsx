@@ -22,7 +22,7 @@ export const Updateblog = () => {
       }
     }
     fetchData();
-  },[]);
+  },[id]);
   const handleContentChange = (value) => {
       setContent(value);
   };
@@ -31,10 +31,12 @@ export const Updateblog = () => {
       e.preventDefault();
       const api = process.env.REACT_APP_BLOG_API;
       try {
+          // eslint-disable-next-line no-unused-vars
           const response = await axios.put(api + 'update', 
           { id, title, content });
           navigate("/community");
       } catch (err) {
+          alert('Sorry try Again');
       }
   }
     return (

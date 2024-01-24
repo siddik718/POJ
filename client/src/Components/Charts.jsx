@@ -1,7 +1,7 @@
 import React from "react";
+// eslint-disable-next-line no-unused-vars
 import { Chart as ChartJS, defaults } from "chart.js/auto";
 import { Bar, Doughnut, Pie } from "react-chartjs-2";
-
 
 defaults.maintainAspectRatio = false;
 defaults.responsive = true;
