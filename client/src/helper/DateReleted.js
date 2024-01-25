@@ -39,7 +39,9 @@ export const Format = (time) => {
 export const FORMAT = (time) => {
     return dayjs(time).format('L, LT');
 }
-
+export const FORMATDAYMONYEAR = (originalTimestamp) => {
+    return dayjs(originalTimestamp).format('DD MMM YYYY');
+}
 export const Duration = (date1,date2)=> {
     const duration = dayjs.duration(timeDiff(date1,date2),'seconds');
     const data = [];

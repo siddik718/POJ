@@ -207,7 +207,7 @@ export const statistics = async (req, res) => {
 // get all users username & id,
 export const allUser = async (req, res) => {
   try {
-    const users = await USER.find();
+    const users = await USER.find().sort({ createdAt: -1 }).limit(5);
     return res.status(200).json({ users });
   } catch (err) {
     return res.status(500).json({
