@@ -8,12 +8,11 @@ const DialogBox = ({ openDialog, setOpenDialog, selectedSourceCode, answer }) =>
         navigator.clipboard.writeText(text);
     };
 
-    const jsxContent = answer.split('\n').map((line, index) => (
-        <React.Fragment key={index}>
-            {line}
-            <br />
-        </React.Fragment>
-    ));
+    const jsxContent = (
+        <pre style={{ whiteSpace: 'pre-wrap' }}>
+            {answer}
+        </pre>
+    ); 
 
     return (
         <Dialog open={openDialog} onClose={() => setOpenDialog(false)} maxWidth="lg" fullWidth>
@@ -47,7 +46,7 @@ const DialogBox = ({ openDialog, setOpenDialog, selectedSourceCode, answer }) =>
                         padding: '25px',
                 }}>
                      <Typography variant="h6">Refactored Version of the Code With AI</Typography>
-                        {jsxContent}
+                        {jsxContent }
                     </Box>
                 </Box>
             </DialogContent>
