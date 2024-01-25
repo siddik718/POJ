@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import AuthContext from '../Context/AuthContext';
 import { FORMATDAYMONYEAR } from '../helper/DateReleted';
+import { LoadingSingleLine } from '../Components/LoadingPage';
 
 const StyledNavLink = styled(NavLink)`
   && {
@@ -173,14 +174,16 @@ export const Home = () => {
               </ContibutorTypography>
             </ContibutorBox>
             <ContibutorDataBox>
-              {users.length > 0 && users.map((user, index) => (
+              {users.length > 0 ? users.map((user, index) => (
                 <Box sx={{display:"flex", justifyContent: "space-between" }} key={index}>
                 <UserNavLink to={`me/${user.username}`}>
                   #{index + 1}  {user.username}
                 </UserNavLink>
                 <Box>Joind On {FORMATDAYMONYEAR(user.createdAt)}</Box>
                 </Box>
-              ))}
+              )) : <>
+                  <LoadingSingleLine />
+                  </>}
             </ContibutorDataBox>
           </BottomRightBox>
         </BottomBox>

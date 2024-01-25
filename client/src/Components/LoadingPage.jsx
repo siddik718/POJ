@@ -12,3 +12,7 @@ export const LoadingPage = () => {
         </Box>
     )
 }
+
+export const LoadingSingleLine = () => {
+    return (<Skeleton variant="text" sx={{ fontSize: '1rem' }} />);
+}
