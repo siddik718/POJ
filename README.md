@@ -8,9 +8,6 @@ Live [POJ](https://poj.netlify.app/)
 - [POJ Web Application](#poj-web-application)
   - [Table of Contents](#table-of-contents)
   - [Project Overview](#project-overview)
-    - [Frontend-Repository](#frontend-repository)
-    - [Backend-Repository](#backend-repository)
-    - [Socket-Repository](#socket-repository)
   - [Features](#features)
   - [Getting Started](#getting-started)
   - [Usage](#usage)
@@ -20,12 +17,6 @@ Live [POJ](https://poj.netlify.app/)
 ## Project Overview
 
 Elevate online experience with this feature-rich web application. Seamlessly login or sign up via Google Auth 2.0 to access a host of capabilities: create, update, and delete blogs; solve programming challenges; and engage in exhilarating programming contests. Uncover the power of refactored code snippets, aided by AI insights for problem comprehension. ChatGPT offers blog summaries and learning resources. ChartJS visualizes profile progress, while real-time messaging fosters community interaction. Unleash the full potential of  online journey with this dynamic and interconnected platform.
-
-#### [Frontend-Repository](https://github.com/siddik718/POJ/tree/master/client)
-
-#### [Backend-Repository](https://github.com/siddik718/POJ/tree/master/api)
-
-#### [Socket-Repository](https://github.com/siddik718/POJ/tree/master/socket)
 
 ## Features
 
@@ -70,6 +61,44 @@ There is a lot interasting feature in the application some of them are mentioned
 - Foster community engagement by enabling real-time messaging between users.
 
 ---
+
+## Screenshots
+
+### Home Page
+
+![Home Page](screenshots/Home.png)
+
+### Login Page
+
+![Login Page](screenshots/Login.png)
+
+### Profile Page
+
+![Profile Page](screenshots/UserProfile.png)
+
+### Problems Page
+
+![Problems Page](screenshots/Problems.png)
+
+### Problem Hint Using AI
+
+![Problem Hint Using AI](screenshots/PronlemHint.png)
+
+### Code Refactoctoring Using AI
+
+![Code Refactoctoring Using AI](screenshots/CodeRefactor.png)
+
+### Community Page
+
+![Community Page](screenshots/Community.png)
+
+### Blog Summery Using AI
+
+![Blog Summery Using AI](screenshots/BlogSummery.png)
+
+### Contest Page
+
+![Contest Page](screenshots/Contest.png)
 
 ## Getting Started
 
