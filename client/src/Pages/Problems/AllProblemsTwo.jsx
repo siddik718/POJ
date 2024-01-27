@@ -19,16 +19,19 @@ const AllProblemsTwo = () => {
     const [mathematics, setMathematics] = useState([]);
     const [sortingSearching, setSortingSearching] = useState([]);
     const [introductoryProblems, setIntroductoryProblems] = useState([]);
+    const [graphAlgorithms, SetGraphAlgorithms] = useState([]);
 
     useEffect(() => {
         const fetchProblems = async () => {
           const response = await axios.get(process.env.REACT_APP_PROBLEM_API);
           const problems = response.data;
+          console.log(problems)
           setDynamicProgramming(problems.DP);
           setAdvancedTechniques(problems.AT);
           setMathematics(problems.MS);
           setSortingSearching(problems.SS);
           setIntroductoryProblems(problems.IP);
+          SetGraphAlgorithms(problems.GA);
           setLoading(false);
         }
         fetchProblems();
@@ -47,6 +50,7 @@ const AllProblemsTwo = () => {
                 <ProblemsList category={"sorting Searching"} problems={sortingSearching} />
                 <ProblemsList category={"mathematics"} problems={mathematics} />
                 <ProblemsList category={"dynamic Programming"} problems={dynamicProgramming} />
+                <ProblemsList category={"Graph Algorithms"} problems={graphAlgorithms} />
                 <ProblemsList category={"advanced Techniques"} problems={advancedTechniques} />
             </ContainerBox>
         </Container>

@@ -4,7 +4,7 @@ export const Footer = () => {
   return (
     <Box sx={{marginTop:'auto'}}>
       <Box sx={{
-      marginTop:'15px',
+      marginTop:'auto',
       minHeight:'60px',
       display:'flex',
       flexDirection:'column',

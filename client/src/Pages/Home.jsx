@@ -1,4 +1,4 @@
-import { Box, Container, Typography, styled } from '@mui/material';
+import { Box, Container, Typography, styled, useTheme } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
@@ -35,10 +35,8 @@ const StyledNavLinkTwo = styled(NavLink)`
   }
 `;
 const ContainerBox = styled(Box)({
-  // border:'1px solid red',
   margin: '8px',
   padding: '5px',
-  height: 'calc(100vh - 140px)',
 })
 const TopBox = styled(Box)({
   display: 'flex',
@@ -49,53 +47,87 @@ const TopBox = styled(Box)({
   height: '50%',
   margin: '5px',
 })
-const TopTypography = styled(Typography)({
+const TopTypography = styled(Typography) (({ theme }) =>({
   // border: '1px solid red',
   margin: '2px',
   padding: '5px',
-  fontSize: '1.5rem',
+  fontSize: '1.5vw',
   fontWeight: '600',
   color: '#000',
   letterSpacing:'5px',
-})
-const BottomTypography = styled(Typography)({
+  [theme.breakpoints.down('md')]: {
+    // backgroundColor: '#e76e41',
+    fontSize:'2.25vw',
+  },
+  [theme.breakpoints.down('sm')]: {
+    // backgroundColor: 'blue',
+    fontSize:'2.50vw',
+  },
+}))
+const BottomTypography = styled(Typography) (({ theme }) =>({
   width: '30%',
   // border: '1px solid red',
   padding: '5px',
   fontSize: '1.25rem',
   textAlign: 'center',
   color: '#000',
-})
-const NavLinkBox = styled(Box)({
+  [theme.breakpoints.down('md')]: {
+    // backgroundColor: '#e76e41',
+    fontSize:'2vw',
+  },
+  [theme.breakpoints.down('sm')]: {
+    // backgroundColor: 'blue',
+    fontSize:'2.25vw',
+  },
+}))
+const NavLinkBox = styled(Box) (({ theme }) => ({
   margin: '5px',
   // border: '1px solid red',
   padding: '15px',
-})
-const BottomBox = styled(Box)({
+ 
+  [theme.breakpoints.down('md')]: {
+    // backgroundColor: '#e76e41',
+    display:'flex',
+    flexDirection:'column',
+    width: '100%',
+  }
+}))
+const BottomBox = styled(Box) (({ theme }) => ({
   // border: '1px solid red',
   display: 'flex',
   justifyContent: 'space-between',
   padding: '5px',
   margin: '5px',
-})
-const BottomLeftBox = styled(Box)({
+  [theme.breakpoints.down('md')]: {
+    // backgroundColor: '#e76e41',
+    flexDirection:'column',
+    justifyContent:'center',
+  }
+}))
+const BottomLeftBox = styled(Box) (({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   width: '50%',
   // border: '1px solid blue',
-})
-const BottomRightBox = styled(Box)({
+  [theme.breakpoints.down('md')]: {
+    width: '100%',
+  }
+}))
+const BottomRightBox = styled(Box) (({ theme }) =>({
   // border:'1px solid red',
   width: '50%',
   margin: '5px',
   padding: '5px',
-})
+  [theme.breakpoints.down('md')]: {
+    width: '100%',
+  }
+}))
 const ContibutorBox = styled(Box)({
   padding: '5px',
   borderBottom: '1.5px solid #8181e1',
   // width: '30%',
 })
-const ContibutorTypography = styled(Typography)({
+const ContibutorTypography = styled(Typography) ({
   fontSize: '1.245rem',
   fontWeight: '600',
   color: '#10692b',
@@ -107,7 +139,16 @@ const ContibutorDataBox = styled(Box)({
   flexDirection: 'column',
   padding: '5px',
   margin: '5px',
-})
+});
+
+const ContibutorDataInnerBox =styled(Box) (({ theme }) =>({
+  display:"flex", 
+  justifyContent: "space-between",
+  [theme.breakpoints.down('sm')]: {
+    fontSize:'2.50vw',
+  },
+}));
+
 const UserNavLink = styled(NavLink)`
   && {
     border-bottom: 1px solid blue;
@@ -118,8 +159,11 @@ const UserNavLink = styled(NavLink)`
     transition: background-color 0.3s ease;
   }
 `;
+
 export const Home = () => {
   const [users, setUsers] = useState([]);
+  // eslint-disable-next-line no-unused-vars
+  const theme = useTheme();
   useEffect(() => {
     const fetch = async () => {
       try {
@@ -175,12 +219,12 @@ export const Home = () => {
             </ContibutorBox>
             <ContibutorDataBox>
               {users.length > 0 ? users.map((user, index) => (
-                <Box sx={{display:"flex", justifyContent: "space-between" }} key={index}>
+                <ContibutorDataInnerBox key={index}>
                 <UserNavLink to={`me/${user.username}`}>
                   #{index + 1}  {user.username}
                 </UserNavLink>
                 <Box>Joind On {FORMATDAYMONYEAR(user.createdAt)}</Box>
-                </Box>
+                </ContibutorDataInnerBox>
               )) : <>
                   <LoadingSingleLine />
                   </>}

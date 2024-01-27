@@ -127,7 +127,7 @@ export const statistics = async (req, res) => {
     const MS = submissions.filter((problem)=> problem.problemCategory === "Mathematics");
     const SS = submissions.filter((problem)=> problem.problemCategory === "Sorting and Searching");
     const IP = submissions.filter((problem)=> problem.problemCategory === "Introductory Problems");
-
+    const GA = submissions.filter((problem)=> problem.problemCategory === "Graph Algorithms");
 
     // find status statistics
     const AC = submissions.filter((submission) => {
@@ -176,6 +176,7 @@ export const statistics = async (req, res) => {
     const HARD = submissions.filter((submission) => {
       return submission.difficulty === "hard";
     });
+    
     // Send the statistics.
     return res.status(200).json({
       blogs: blogs.length,
@@ -195,7 +196,7 @@ export const statistics = async (req, res) => {
       HARD: HARD.length,
       ID: user._id,
       submissionsArray: submissions,
-      DP:DP.length,AT:AT.length,SS:SS.length,MS:MS.length,IP:IP.length
+      DP:DP.length,AT:AT.length,SS:SS.length,MS:MS.length,IP:IP.length,GA:GA.length
     });
   } catch (err) {
     return res.status(400).json({

@@ -7,39 +7,53 @@ const TopBox = styled(Box)({
 const InnerBox = styled(Box)({
     display: 'flex',
     justifyContent: 'space-between',
+    alignItems:'center',
+    marginBottom:'2px',
     padding: '5px',
     color: '#171414',
     fontFamily: 'Sunflower',
     fontSize: '13px',
     fontStyle: 'normal',
     fontWeight: '300',
-    lineHeight: 'normal',
-    letterSpacing: '0.78px',
 })
-const Stats = ({ ip, ss, ms, dp, at }) => {
+const CustomTypography = styled(Typography) (({ theme }) =>({
+    fontSize: '1.25vw',
+    [theme.breakpoints.down('md')]: {
+        fontSize:'2vw',
+    },
+    [theme.breakpoints.down('sm')]: {
+        fontSize:'2.5vw',
+    },
+}));
+
+const Stats = ({ ip, ss, ms, dp, at, ga }) => {
 
     return (
         <TopBox>
-            <Typography variant="body1" color="primary">PROBLEM TRIED ON:</Typography>
+            <CustomTypography variant="body1" color="primary">PROBLEM TRIED ON:</CustomTypography>
             <InnerBox>
-                <Typography>INTRODUCTORY PROBLEMS</Typography>
-                <Typography>{ip} TRIED</Typography>
+                <CustomTypography>INTRODUCTORY PROBLEMS</CustomTypography>
+                <CustomTypography>{ip} TRIED</CustomTypography>
             </InnerBox>
             <InnerBox>
-                <Typography>SORTING SEARCHING</Typography>
-                <Typography>{ss} TRIED</Typography>
+                <CustomTypography>SORTING SEARCHING</CustomTypography>
+                <CustomTypography>{ss} TRIED</CustomTypography>
             </InnerBox>
             <InnerBox>
-                <Typography>MATHEMATICS</Typography>
-                <Typography>{ms} TRIED</Typography>
+                <CustomTypography>MATHEMATICS</CustomTypography>
+                <CustomTypography>{ms} TRIED</CustomTypography>
             </InnerBox>
             <InnerBox>
-                <Typography>DYNAMIC PROGRAMMING</Typography>
-                <Typography>{dp} TRIED</Typography>
+                <CustomTypography>DYNAMIC PROGRAMMING</CustomTypography>
+                <CustomTypography>{dp} TRIED</CustomTypography>
             </InnerBox>
             <InnerBox>
-                <Typography>ADVANCED TECHNIQUES</Typography>
-                <Typography>{at} TRIED</Typography>
+                <CustomTypography>GRAPH ALGORITHMS</CustomTypography>
+                <CustomTypography>{ga} TRIED</CustomTypography>
+            </InnerBox>
+            <InnerBox>
+                <CustomTypography>ADVANCED TECHNIQUES</CustomTypography>
+                <CustomTypography>{at} TRIED</CustomTypography>
             </InnerBox>
         </TopBox>
     )

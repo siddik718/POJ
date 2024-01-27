@@ -20,6 +20,7 @@ const Standing = ({ contestID }) => {
         const res = await axios.get(api, {
           params: { contestID: contestID },
         });
+        console.log(res.data);
         setStandings(res.data);
       } catch (err) {
         console.log(err);

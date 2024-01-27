@@ -3,22 +3,31 @@ import { useContext } from 'react';
 import AuthContext from '../../Context/AuthContext';
 import axios from 'axios';
 import { BarChart, DoughnutChart, PieChart } from '../../Components/Charts';
-import { Box, Button, Typography, styled } from '@mui/material';
+import { Box, Button, Typography, styled, useTheme } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom'
 import Stats from '../../Components/Stats';
-const Container = styled(Box)({
+
+const Container = styled(Box) (({ theme }) =>({
     width: 'auto',
-    height: '80vh',
+    minHeight: 'calc(100vh - 80px)',
     display: 'flex',
-    margin: '10px'
-});
-const LeftBox = styled(Box)({
+    margin: '10px',
+    [theme.breakpoints.down('md')]: {
+        // backgroundColor: 'red',
+        flexDirection:'column',
+    },
+}));
+const LeftBox = styled(Box) (({ theme }) => ({
+    // border:'1px solid red',
     flex: 4,
     marginRight: '10px',
-    borderRadius: '35px',
+    borderRadius: '15px',
     background: 'linear-gradient(180deg, rgba(236, 243, 250, 0.80) 0.02%, rgba(232, 240, 251, 0.80) 59.38%, rgba(230, 238, 251, 0.80) 99.98%)',
     padding: '30px',
-});
+    [theme.breakpoints.down('md')]: {
+        marginBottom: '10px',
+    },
+}));
 const ProfileInfo = styled(Box)({
     width: '100%',
     height: '25%',
@@ -31,19 +40,25 @@ const ProfileInfoDetails = styled(Box)({
     margin: '2px',
     padding: '2px',
 })
-const UserName = styled(Box)({
+const UserName = styled(Box) (({ theme }) =>({
     width: '100%',
     margin: '5px',
     padding: '5px',
     textAlign: 'center',
     color: 'rgba(15, 1, 1, 0.90)',
     fontFamily: 'Akaya Kanadaka',
-    fontSize: '16px',
+    fontSize: '1.50vw',
     fontStyle: 'normal',
     fontWeight: '400',
     lineHeight: 'normal',
     letterSpacing: '5.92px',
-});
+    [theme.breakpoints.down('md')]: {
+        fontSize:'2vw',
+    },
+    [theme.breakpoints.down('sm')]: {
+        fontSize:'3vw',
+    },
+}));
 const SendButtonBox = styled(Box)({
     width: '100%',
     margin: '5px',
@@ -75,7 +90,7 @@ const ProfileStatsUpper = styled(Box)({
     margin: '5px',
     color: '#080D21',
     fontFamily: 'Sunflower',
-    fontSize: '18px',
+    fontSize: '1.25vw',
     fontStyle: 'normal',
     fontWeight: '300',
     lineHeight: '16px', /* 88.889% */
@@ -85,25 +100,50 @@ const ProfileStatsLower = styled(Box)({
     padding: '10px'
 })
 const RightBox = styled(Box)({
+    // border:'1px solid red',
     flex: 8,
     marginLeft: '10px',
-    height: '100%',
+    height: 'inherit',
 });
-const UpperRight = styled(Box)({
+const UpperRight = styled(Box) (({ theme }) =>({
     height: '48%',
     margin: '2px',
     display: 'flex',
-});
-const UpperRightBox = styled(Box)({
+    // border: '1px solid red',
+    [theme.breakpoints.down('sm')]: {
+        // backgroundColor: 'red',
+        flexDirection:'column',
+    },
+}));
+const UpperRightBox = styled(Box) (({ theme }) =>({
     width: '50%',
     margin: '2px',
-});
+    // border: '1px solid red',
+    [theme.breakpoints.down('sm')]: {
+        width:'100%',
+    },
+}));
 const LowerRight = styled(Box)({
     height: '48%',
     margin: '2px',
+    // border: '1px solid red',
 });
 
+const CustomTypography = styled(Typography) (({ theme }) =>({
+    fontSize: '1.25vw',
+    [theme.breakpoints.down('md')]: {
+        fontSize:'2vw',
+    },
+    [theme.breakpoints.down('sm')]: {
+        fontSize:'2.5vw',
+    },
+}));
+
+
+
 export const Default2 = () => {
+    // eslint-disable-next-line no-unused-vars
+    const theme = useTheme();
     const currentUserProfile = useParams().id;
     const { username } = useContext(AuthContext);
     const [stats, setStats] = useState({});
@@ -150,15 +190,15 @@ export const Default2 = () => {
                 </ProfileInfo>
                 <ProfileStats>
                     <ProfileStatsUpper>
-                        <Typography>
+                        <CustomTypography>
                         DISCUSSION POINTS : {stats.blogs}
-                        </Typography>
-                        <Typography>
+                        </CustomTypography>
+                        <CustomTypography>
                             PROBLEM TRIED : {stats.submissions}
-                        </Typography>
-                        <Typography>
+                        </CustomTypography>
+                        <CustomTypography>
                         ACCEPTENCE RATIO :  {ratio}%
-                        </Typography>
+                        </CustomTypography>
                     </ProfileStatsUpper>
                     <ProfileStatsLower>
                         <Stats 
@@ -167,6 +207,7 @@ export const Default2 = () => {
                         ip={stats.IP} 
                         ss={stats.SS} 
                         at={stats.AT} 
+                        ga={stats.GA} 
                         />
                     </ProfileStatsLower>
                 </ProfileStats>

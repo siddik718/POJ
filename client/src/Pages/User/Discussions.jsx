@@ -8,9 +8,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 
-
-
-
 export const Discussions = () => {
     const [blogs, setBlogs] = useState([]);
     const { email } = useContext(AuthContext);

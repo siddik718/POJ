@@ -3,13 +3,16 @@ import PROBLEMS from "../Models/problemModel.js";
 export const allProblem = async (req, res) => {
   try {
     const problems = await PROBLEMS.find();
+
     const DP = problems.filter((problem)=> problem.selectedTags === "Dynamic Programming");
     const AT = problems.filter((problem)=> problem.selectedTags === "Advanced Techniques");
     const MS = problems.filter((problem)=> problem.selectedTags === "Mathematics");
     const SS = problems.filter((problem)=> problem.selectedTags === "Sorting and Searching");
     const IP = problems.filter((problem)=> problem.selectedTags === "Introductory Problems");
+    const GA = problems.filter((problem)=> problem.selectedTags === "Graph Algorithms");
+
     return res.status(200).json({
-      problems,DP,AT,MS,SS,IP
+      problems,DP,AT,MS,SS,IP,GA
     });
   } catch (err) {
     return res.status(500).json({

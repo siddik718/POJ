@@ -78,12 +78,14 @@ function App() {
             <Route element={<PrivateRouteForContest />}>
               <Route path='/submissions' element={<AllSubmission />} />
               <Route path='message/:id' element={<Messenger />} />
+            <Route path='/problems/:id' element={<Oneproblem />} />
             </Route>
 
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<Signup />} />
 
             <Route path='/community' element={<Allblogs />} />
+            
             <Route path='/problems' element={<AllProblemsTwo />} />
             <Route path='/problems/:id' element={<Oneproblem />} />
 
@@ -99,8 +101,8 @@ function App() {
             <Route path='/*' element={<PageNotFound />} />
 
           </Routes>
-          <Footer />
         </div>
+          <Footer />
       </GoogleOAuthProvider>
     </AuthProvider>
     </ThemeProvider>

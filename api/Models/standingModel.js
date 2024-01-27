@@ -9,6 +9,11 @@ const standingSchema = new Schema({
         required: true,
         default: 0,
     },
+    solved: {
+        type: Number,
+        required: true,
+        default: 0,
+    },
     username : {
         type: String,
         required: true
